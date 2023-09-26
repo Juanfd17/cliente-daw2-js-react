@@ -1,17 +1,25 @@
+let continuar = true;
 do{
-    do{
-        var correcto = true;
-        var cantidad = (prompt("Introduce una cantidad de dinero: "));
-        if(cantidad == "FIN"){
-            break;
+
+    var cantidad = prompt("Introduce una cantidad de dinero: ");
+    if (cantidad == "FIN") {
+        continuar = false;
+    } else {
+        if (esNumero(cantidad)) {
+            alert(pasoAMonedas(cantidad));
+        } else{
+            alert("Introduce un número válido");
         }
-        if(isNaN(cantidad)){
-            alert("No has introducido un número");
-            correcto = false;
-        }
-    }while(!correcto);
-    alert("La cantidad de monedas necesarias es: " + pasoAMonedas(cantidad));
-}while(cantidad != "FIN")
+    }
+}while(continuar);
+
+function esNumero(numero){
+    if (isNaN(numero)) {
+        return false;
+    } else {
+        return true;
+    }
+}
 
 function pasoAMonedas(cantidad) {
     let cantidadMonedas = [0, 0, 0, 0, 0, 0, 0, 0];

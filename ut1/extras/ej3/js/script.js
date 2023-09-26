@@ -1,42 +1,57 @@
-let monedasIniciales = prompt("Introduce la cantidad de dinero inicial: ");
-monedasIniciales = monedasIniciales.split(",");
-let cajaMonedas = [];
+let continuar = true;
 
-for (var i = 0; i < monedasIniciales.length; i++) {
-    cajaMonedas.push(parseInt(monedasIniciales[i]));
+let cantidadMonedas = prompt("Introduce una cantidad de cada moneda: ")
+cantidadMonedas = cantidadMonedas.split(",");
+var cajaMonedas = [];
+
+for (var i = 0; i < cantidadMonedas.length; i++) {
+    cajaMonedas.push(parseInt(cantidadMonedas[i]));
 }
 
 do{
-    do{
-        var correcto = true;
-        var cantidad = (prompt("Introduce una cantidad de dinero: "));
-        if(cantidad == "FIN"){
-            break;
-        }
-        if(isNaN(cantidad)){
-            alert("No has introducido un número");
-            correcto = false;
-        }
-    }while(!correcto);
-    alert("La cantidad de monedas necesarias es: " + pasoAMonedas(cantidad, cajaMonedas) + "\n" + "La cantidad de monedas restantes es: " + cajaMonedas.join(","));
-}while(cantidad != "FIN")
 
-function pasoAMonedas(cantidad, cajaMonedas) {
+    var cantidad = prompt("Introduce una cantidad de dinero: ");
+    if (cantidad == "FIN") {
+        continuar = false;
+    } else {
+        if (esNumero(cantidad)) {
+            let resultado = pasoAMonedas(cantidad, cajaMonedas);
+            if (resultado == 0) {
+                alert("No hay monedas suficientes para devolver la cantidad");
+                break;
+            } else{
+                alert(resultado);
+            }
+        } else{
+            alert("Introduce un número válido");
+        }
+    }
+}while(continuar);
+
+function esNumero(numero){
+    if (isNaN(numero)) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+function pasoAMonedas(cantidad) {
     let cantidadMonedas = [0, 0, 0, 0, 0, 0, 0, 0];
     let monedas = [2,1,0.5,0.2,0.1,0.05,0.02,0.01];
     
     for (var i = 0; i < monedas.length; i++) {
-        while (cantidad >= monedas[i]) {
+        while (cantidad >= monedas[i] && cajaMonedas[i] > 0) {
             cantidadMonedas[i]++;
             cantidad -= monedas[i];
             cantidad = cantidad.toFixed(2);
             cajaMonedas[i]--;
-            if(cajaMonedas[i] < 0){
-                alert("No hay monedas suficientes");
-                break;
-            }
         }
     }
 
-    return cantidadMonedas, cajaMonedas;
+    if (cantidad > 0) {
+        return 0;
+    }
+
+    return cantidadMonedas + " monedas que quedan: " + cajaMonedas;
 }
