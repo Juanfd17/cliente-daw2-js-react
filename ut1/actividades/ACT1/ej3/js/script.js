@@ -1,6 +1,5 @@
 let continuar = true;
 do{
-
     var cantidad = prompt("Introduce una cantidad de dinero: ");
     if (cantidad == "FIN") {
         continuar = false;
@@ -33,5 +32,15 @@ function pasoAMonedas(cantidad) {
         }
     }
 
-    return cantidadMonedas;
+    let mensaje = "";
+
+    for (let i = 0; i < monedas.length; i++) {
+        if (i <= 1) {
+            mensaje += cantidadMonedas[i] + " monedas de " + monedas[i] + "€\n";
+        } else {
+            mensaje += cantidadMonedas[i] + " menedas de " + (monedas[i] * 100) + " centimos€\n";
+        }
+    }
+
+    return mensaje;
 }
