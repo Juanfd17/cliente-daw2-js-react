@@ -1,0 +1,35 @@
+
+@font-face{
+    font-family:DigitalDream;
+    src:url(fonts/DIGITALDREAM.ttf);
+}
+
+#parrafo{
+    font-family:Calibri;
+    font-size:1.5em;
+    float:top;
+}
+
+#divReloj{
+    font-family:DigitalDream;
+    font-size:2em;
+    color:darkgreen;
+    margin:15px;
+    padding:15px;
+    border:5px solid darkgreen;
+    background-color:lightgreen;
+    float:left;
+    border-radius: 10px;
+}
+
+#divVacaciones{
+    
+    font-size:2em;
+    color:darkblue;
+    margin:15px;
+    padding:15px;
+    border:5px solid darkblue;
+    background-color:lightblue;
+    float:left;
+    border-radius: 10px;
+}
