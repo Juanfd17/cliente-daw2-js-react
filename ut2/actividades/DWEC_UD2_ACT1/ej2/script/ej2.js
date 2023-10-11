@@ -57,6 +57,8 @@ function comprobadorPassword(contrasenia) {
         cambios.push(" no se puedes tener 3 o mas caracteres iguales seguidos")
     }
 
+    cambios.push(" " + cambios.length -1 + " cambios como minimo")
+
 
     return cambios.toString();
 }

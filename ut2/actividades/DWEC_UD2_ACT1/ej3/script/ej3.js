@@ -1,6 +1,6 @@
 let mes = 10;
 let anio = 2023;
-console.log(tieneViernes13(mes, anio))
+console.log(cuentaViernes13(anio))
 
 
 function tieneViernes13(mes, anio) {
@@ -10,4 +10,17 @@ function tieneViernes13(mes, anio) {
     } else {
         return false
     }
+}
+
+function cuentaViernes13(anio) {
+    let cuantos = 0;
+
+    for (let i = 1; i < 13; i++) {
+        if (tieneViernes13(i, anio)){
+            cuantos++;
+        }
+
+    }
+
+    return cuantos;
 }
