@@ -81,9 +81,28 @@ const checkAutor = (biblioteca, autorBusca) => biblioteca.find((libro) => libro.
 console.log(checkAutor(biblioteca, "I. P. Ramírez"))
 
 const forraLibro = (biblioteca) => {
-    for (const bibliotecaKey in biblioteca) {
-        biblioteca[bibliotecaKey].forrado = true;
+    for (const libro of biblioteca) {
+        libro.forrado = true;
     }
 }
 
+forraLibro(biblioteca);
 console.log(biblioteca)
+
+const prestarLibro = (biblioteca, libro) =>{
+    let indice = biblioteca.findIndex(titulo => titulo.nombre === libro.nombre);
+    if (indice == -1){
+        console.log("No se a encontrado el libro")
+    } else {
+        console.log("Se a borrado " + biblioteca[indice].nombre)
+        biblioteca.splice(indice, 1);
+    }
+}
+
+prestarLibro(biblioteca, Petunias);
+prestarLibro(biblioteca, Petunias);
+console.log(biblioteca);
+
+const devolverLibro = (biblioteca, libro) => {
+    biblioteca.push(libro);
+}
