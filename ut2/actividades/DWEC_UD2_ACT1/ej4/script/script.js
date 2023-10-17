@@ -1,14 +1,14 @@
-//console.log( validaSudoku([
-//    [ 6, 3, 9, 5, 7, 4, 1, 8, 2 ],
-//    [ 5, 4, 1, 8, 2, 9, 3, 7, 6 ],
-//    [ 7, 8, 2, 6, 1, 3, 9, 5, 4 ],
-//    [ 1, 9, 8, 4, 6, 7, 5, 2, 3 ],
-//    [ 3, 6, 5, 9, 8, 2, 4, 1, 7 ],
-//    [ 4, 2, 7, 1, 3, 5, 8, 6, 9 ],
-//    [ 9, 5, 6, 7, 4, 8, 2, 3, 1 ],
-//    [ 8, 1, 3, 2, 9, 6, 7, 4, 5 ],
-//    [ 2, 7, 4, 3, 5, 1, 6, 9, 8 ]
-//]));
+console.log( validaSudoku([
+    [ 6, 3, 9, 5, 7, 4, 1, 8, 2 ],
+    [ 5, 4, 1, 8, 2, 9, 3, 7, 6 ],
+    [ 7, 8, 2, 6, 1, 3, 9, 5, 4 ],
+    [ 1, 9, 8, 4, 6, 7, 5, 2, 3 ],
+    [ 3, 6, 5, 9, 8, 2, 4, 1, 7 ],
+    [ 4, 2, 7, 1, 3, 5, 8, 6, 9 ],
+    [ 9, 5, 6, 7, 4, 8, 2, 3, 1 ],
+    [ 8, 1, 3, 2, 9, 6, 7, 4, 5 ],
+    [ 2, 7, 4, 3, 5, 1, 6, 9, 8 ]
+]));
 
 console.log( validaSudoku([
     [ 1, 2, 3, 1, 2, 3, 1, 2, 3 ],
@@ -27,7 +27,7 @@ function validaSudoku(sudoku) {
     //columnas
     for (let i = 0; i < sudoku.length; i++) {
        if (tieneNumerosRepetidos(sudoku[i])){
-           //return false;
+           return false;
        }
     }
 
@@ -39,7 +39,7 @@ function validaSudoku(sudoku) {
         }
 
         if (tieneNumerosRepetidos(numeros)){
-            //return false;
+            return false;
         }
     }
 
@@ -48,13 +48,12 @@ function validaSudoku(sudoku) {
         for (let j = 0; j < sudoku.length; j += 3) {
             numeros = [];
 
-            for (let k = 1; k < 4; k++) {
-                for (let l = 1; l < 4; l++) {
-                    numeros.push(sudoku[(k * i) - 1][(l * j) - 1])
+            for (let k = 0; k < 3; k++) {
+                for (let l = 0; l < 3; l++) {
+                    numeros.push(sudoku[(k + i)][(l + j)])
                 }
             }
 
-            console.log(numeros)
             if (tieneNumerosRepetidos(numeros)){
                 return false;
             }
