@@ -1,8 +1,8 @@
 class Robot {
     constructor(x, y, orientacion) {
-        this.x = x;
-        this.y = y;
-        this.orientacion = orientacion;
+        this._x = x;
+        this._y = y;
+        this._orientacion = orientacion;
     }
 
     instrucciones(instrucciones){
@@ -24,63 +24,63 @@ class Robot {
     }
 
     avanza(cuanto){
-        switch (this.orientacion){
+        switch (this._orientacion){
             case "norte":
-                this.y += cuanto;
+                this._y += cuanto;
                 break;
 
             case "sur":
-                this.y -= cuanto;
+                this._y -= cuanto;
                 break;
 
             case "este":
-                this.x += cuanto;
+                this._x += cuanto;
                 break;
 
             case "oeste":
-                this.x -= cuanto;
+                this._x -= cuanto;
                 break;
         }
     }
 
     gira(hacia){
-        switch (this.orientacion) {
+        switch (this._orientacion) {
             case "norte":
                 if (hacia === "D") {
-                    this.orientacion = "este";
+                    this._orientacion = "este";
                 } else {
-                    this.orientacion = "oeste";
+                    this._orientacion = "oeste";
                 }
                 break;
 
             case "sur":
                 if (hacia === "D") {
-                    this.orientacion = "oeste";
+                    this._orientacion = "oeste";
                 } else {
-                    this.orientacion = "este";
+                    this._orientacion = "este";
                 }
                 break;
 
             case "este":
                 if (hacia === "D") {
-                    this.orientacion = "sur";
+                    this._orientacion = "sur";
                 } else {
-                    this.orientacion = "norte";
+                    this._orientacion = "norte";
                 }
                 break;
 
             case "oeste":
                 if (hacia === "D") {
-                    this.orientacion = "norte";
+                    this._orientacion = "norte";
                 } else {
-                    this.orientacion = "sur";
+                    this._orientacion = "sur";
                 }
                 break;
         }
     }
 
     toString(){
-        return "(" + this.x + "," + this.y + ") mirando al " + this.orientacion + ".";
+        return "(" + this._x + "," + this._y + ") mirando al " + this._orientacion + ".";
     }
 }
 
