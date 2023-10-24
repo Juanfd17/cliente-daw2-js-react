@@ -67,16 +67,35 @@ export default class CentralMedidas{
 
     toHTML(){
         let texto = "";
-        let ciudades = this.getNombreCiudades();
+        let ciudades = this.#getNombreCiudades();
 
-        texto += "<table>";
+        texto += "<table border='1'>";
         texto += "<tr><td></td>";
 
-        for (let i = 0; i < this.#medidas[ciudades[0]].length; i++) {
-            texto += "<td>" + i + "</td>"
+        for (let i = 0; i < this.#medidas[ciudades[0]].length + 1; i++) {
+            if (i !== this.#medidas[ciudades[0]].length){
+                texto += "<td>" + (i + 1) + "</td>"
+            } else {
+                texto += "<td>" + "Meida" + "</td>"
+            }
         }
 
         texto += "</tr>"
+
+        for (let i = 0; i < ciudades.length; i++) {
+            texto += "<tr>"
+            for (let j = 0; j < this.#medidas[ciudades[i]].length + 2; j++) {
+                if (j === 0){
+                    texto += "<td>" + ciudades[i] + "</td>";
+                } else if(j === this.#medidas[ciudades[i]].length + 1){
+                    texto += "<td>" + this.mediaMedidas(ciudades[i]) + "</td>"
+                } else {
+                    texto += "<td>" + this.#medidas[ciudades[i]][j -1] + "</td>"
+                }
+            }
+
+            texto += "</tr>"
+        }
 
         document.getElementById("listado").innerHTML = texto;
     }
