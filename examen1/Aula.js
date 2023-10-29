@@ -50,7 +50,7 @@ export default class Aula{
 
     getPorcentajeOcupacion(){
         let puestosUsados = this.calculaPuestosUsados();
-        let puestosTotales = this.calculaPuestos();
+        let puestosTotales = this.#puestos;
         return (puestosUsados / puestosTotales) * 100;
     }
 
@@ -61,7 +61,7 @@ export default class Aula{
             puestos += this.#equipos[i].length;
         }
 
-        return this.#puestos;
+        return puestos;
     }
 
     calculaPuestosUsados(){

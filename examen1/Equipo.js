@@ -13,7 +13,7 @@ export default class Equipo{
         if (fecha instanceof Date){
             this.#fecha = fecha;
         } else {
-            this.#fecha = fechaHoy.setDate(fechaHoy.getDate() + fecha);
+            this.#fecha = fechaHoy.setDate(fechaHoy.getDate() + parseInt(fecha));
         }
 
         this.calcularId();
