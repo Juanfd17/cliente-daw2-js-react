@@ -1,6 +1,4 @@
-let mes = 10;
-let anio = 2023;
-console.log(cuentaViernes13(anio))
+console.log(cuentaViernes13(2023));
 
 
 function tieneViernes13(mes, anio) {

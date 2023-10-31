@@ -1,5 +1,7 @@
-let contrasenia = "Ass11";
-console.log(comprobadorPassword(contrasenia));
+console.log(comprobadorPassword ("Maria!"));
+console.log(comprobadorPassword ("maria23!"));
+console.log(comprobadorPassword ("MARIAMARIAMARIAMARIA!"));
+console.log(comprobadorPassword ("Mariaaaa!!1"));
 function comprobadorPassword(contrasenia) {
     cambios = [];
 
