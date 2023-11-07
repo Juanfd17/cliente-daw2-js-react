@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset='utf-8'>
+    <title>M06-ACTIVIDAD-3_MDB-2023</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='css/style.css'>
+    <script src='actividad_restaurante.js'></script>
+
+    
+</head>
+<body>
+
+    <header>
+        <div class="barra-superior">
+            <a class="mseis" href="index.html">M06</a>
+            
+            <nav class="navegacion">
+                <div>
+                    <p class="izda">Desarrollo web en entorno cliente</p> 
+                </div>
+                <div>
+                    <p class="centro">Actividad 3 - Ejercicio 1</p>
+                </div>
+                <div>
+                    <p class="centro">Autor: Montse Díaz</p>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section>
+        <h1>GESTION DE UN RESTAURANTE</h1>
+        <h2>PLATOS DISPONIBLES</h2>
+        <div id="listadoPlatos"> </div>
+        
+        <h2>MENUS DISPONIBLES </h2>
+        <div id="listadoMenus"> </div>
+
+
+               
+        <!-- Crea la función que añade platos al menu -->
+    
+        <fieldset>
+            <h3>AÑADIR PLATO</h3>
+            <label for="nombre">Nombre del plato:</label>
+            <input type="text" name="nombre" id="nombre" placeholder="nombre" />
+            <label for="descripcion">Descripción del plato:</label>
+            <input type="text" name="nombre" id="descripcion" placeholder="descripcion" />
+            <label for="precio">Precio del plato:</label>
+            <input type="number" id="precio" placeholder="precio" />€
+            <button onclick="addPlato();">AÑADIR PLATO</button> 
+            
+        </fieldset>
+        
+        <!-- Eliminar platos -->
+        
+        <fieldset>
+            <h3> ELIMINAR PLATO</h3>
+            Posicion del plato a borrar<input type="number" placeholder="numero" id="numeroBorrar"> 
+            <button onclick="borrarPlato();">ELIMINAR PLATO</button> 
+
+        </fieldset>
+
+
+        <!-- 	Crea la función añade menu -->
+        
+        <fieldset>
+            <h3>AÑADIR MENU</h3>
+            <label for="nombre">Nombre del menu:</label>
+            <input type="text" id="nombreMenu" placeholder="nombre" />
+            <button onclick="addMenu();">AÑADE MENU</button> 
+        </fieldset>
+
+
+
+        <fieldset>
+            <h3>AÑADIR PLATO AL MENU</h3>
+            Plato Nº:<select  id="numeroPlato"></select>
+            Nombre del Menu:<select id="numeroMenu"></select>
+            <button onclick="addPlatoMenu();">AÑADE PLATO AL MENU</button>
+        </fieldset>
+
+
+
+
+
+
+    </section>
+</body>
+</html>
