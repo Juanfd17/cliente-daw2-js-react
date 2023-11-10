@@ -1,0 +1,16 @@
+
+#calendario{
+	width:100px;
+	text-align: center;
+	font-family:"Arial Black";	
+}
+
+#anio, #mes{
+	background-color:#6041F1;
+	color:white;
+}
+
+#dia{
+	background-color:#56AADC;
+	font-size:3em;	
+}
