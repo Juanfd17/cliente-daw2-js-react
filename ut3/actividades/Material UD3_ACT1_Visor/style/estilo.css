@@ -1,0 +1,92 @@
+
+@font-face{
+	font-family: GoT;
+	src:url("fonts/got.ttf");
+}
+
+*{
+	font-family: GoT;
+}
+
+
+/* "Truco" para conseguir una imagen de fondo transparente en el body */
+#contenedor{
+   position: relative;
+}
+
+#contenedor:after {
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url(images/fondo.jpg); 
+    width: 100%;
+    height: 100%;
+    opacity : 0.2;
+    z-index: -1;
+}
+
+
+h2{
+	margin:0 auto;
+	text-align:center;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+#galeria{
+	width:500px;
+	margin:0 auto;
+	border:2px solid black;
+	background-color:#FFFFFF; 
+	border-radius:10px;
+}
+
+#imagen{
+	width:300px;
+	height:300px;
+	background-size:contain;
+	margin:0 auto;
+	transition: background-image 1s;
+	-webkit-transition: background-image 1s;
+	
+}
+
+#botones{
+	margin:10px;
+	text-align:center;
+}
+
+#botones ul{
+	list-style-type:none;
+	display:inline;
+	padding-left:0;
+}
+
+#botones ul li{
+	display:inline;
+	padding-left:5px;
+	padding-right:5px;
+}
+
+#botones * a{
+	margin-bottom:10px;
+	padding:4px;
+	background-color:#B8B894;
+	border:2px solid #3B3B3A;
+	font-size:.6em;
+	color:black;
+	text-decoration:none;
+	border-radius: 10px;
+}
+
+.deshabilitado{
+	background-color:#FF5C33 !important;
+	cursor:default; /* MODIFICADO */
+}
+
+.habilitado{
+	background-color:#B8B894 !important;
+}
+
