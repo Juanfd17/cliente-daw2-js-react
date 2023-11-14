@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Temperaturas</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link rel="stylesheet" type="text/css" href="style/temperaturas.css" />
+	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<script type="module" src="script/central_medidas_prueba.js"></script>
+</head>
+
+<body>
+	<h3>Control de temperaturas</h3>
+
+	<form id="formulario" action="#" method="get">
+
+		<div class="linea_formulario limpia">
+			<label for="ciudad">Ciudad</label>
+			<input required type="text" name="ciudad" id="ciudad" autofocus />
+		</div>
+
+		<div class="linea_formulario limpia">
+			<label for="ciudad">Medidas</label>
+			<textarea name="medidas" id="medidas" rows="3" required></textarea>
+		</div>
+
+		<div class="linea_formulario limpia">
+			<input type="radio" name="tipo" id="medidas_manual" value="manual" checked /><span>Manual</span>
+			<input type="radio" name="tipo" id="medidas_aleatorio" value="aleatorio" /><span>Aleatorio</span>
+		</div>
+
+		<div class="linea_formulario limpia">
+			<input type="button" name="guardar" id="guardar" value="Guardar" />
+			<input type="button" name="borrar" id="borrar" value="Borrar" />
+		</div>
+
+		<div id="tabla-medidas">
+		</div>
+
+		<div id="temperatura-media" class="linea_formulario info ">
+			Temperatura media
+		</div>
+
+		<div id="errores" class="linea_formulario error ">
+			Errores
+		</div>
+
+	</form>
+
+<table>
+
+</table>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+
+*{
+	font-family: 'Montserrat', sans-serif;
+}
+
+#formulario .linea_formulario{
+	margin:15px;
+	width:400px;
+}
+
+#formulario .linea_formulario label{
+	float:left;
+	width:20%;
+}
+
+#formulario .linea_formulario input[type="text"],  
+#formulario .linea_formulario textarea
+{
+	float:left;
+	width:70%;
+	padding:2px;
+}
+
+
+#formulario .linea_formulario #medidas {
+    width:70%;
+	resize:none;
+}
+
+#formulario .botones{
+	margin:0 auto;
+}
+
+
+#formulario input:focus, #formulario textarea:focus  {
+	border:2px solid black;
+	outline:0px;
+	background-color:#DBDBDB;
+}
+
+
+
+.limpia:after{
+	clear:both;
+	content:"";
+	display:block;
+}
+
+
+table{
+border:5px solid black;
+}
+table th {
+background-color: #d6d6c2;
+}
+
+table .col_media {
+  background-color: #bbbb77;
+}
+
+.oculto{
+  display:none;
+ }
+
+.info{
+	padding-left:20px;
+	background-repeat:no-repeat;
+	background-position: 5px center;
+	color:#5e85c4;
+	padding:5px;
+	padding-left:25px;
+	border: 5px solid #5e85c4;
+	background-color:#d5dce8;
+	border-radius:2px;
+	margin:15px;
+}
+
+.error{
+	clear:both;
+	padding-left:20px;
+	background-repeat:no-repeat;
+	background-position: 5px center;
+	color:#d70000;
+	padding:5px;
+	padding-left:25px;
+	border: 5px solid #d70000;
+	background-color:rgba(200,0,0,0.2);
+	border-radius:2px;
+	margin:15px;
+	}
