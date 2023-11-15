@@ -7,6 +7,7 @@ function principal() {
     let formManual = document.querySelector("#medidas_manual");
     let formAleatorio = document.querySelector("#medidas_aleatorio");
     let fomrGuardar = document.querySelector("#guardar");
+    let fomrBorrar = document.querySelector("#borrar");
 
     formCiudad.addEventListener("keyup", textoMayusucalas);
 
@@ -14,6 +15,7 @@ function principal() {
     formAleatorio.addEventListener("click", medidasAleatorias)
 
     fomrGuardar.addEventListener("click", guardarMedidas)
+    fomrBorrar.addEventListener("click", borrarCiudad)
 }
 
 function textoMayusucalas(ev) {
@@ -40,7 +42,9 @@ function guardarMedidas() {
 
     let arrayMedidas = pasarNumerosArray(formMedidas.value);
 
-    console.log(centralMedidas.insertaMedida(formCiudad.value, arrayMedidas));
+    if (arrayMedidas)
+    centralMedidas.insertaMedida(formCiudad.value, arrayMedidas);
+    updateTable();
 }
 
 function pasarNumerosArray(numeros){
@@ -49,18 +53,15 @@ function pasarNumerosArray(numeros){
     return numeros;
 }
 
+function borrarCiudad(ev) {
+    let ciudad = document.querySelector("#ciudad").value;
+    centralMedidas.eliminaCiudad(ciudad);
+    updateTable();
+}
+
+function updateTable() {
+    let tabla = document.querySelector("#tabla");
+    tabla.innerHTML = centralMedidas.tabla();
+}
+
 let centralMedidas = new CentralMedidas();
-
-
-//console.log(centralMedidas.insertaMedida("Oviedo", [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]))
-//console.log(centralMedidas.insertaMedida("Oviedo", [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30]))
-//console.log(centralMedidas.mediaMedidas("Oviedo"));
-//console.log(centralMedidas.insertaAleatorio("Santander"));
-//console.log(centralMedidas.insertaAleatorio("Santander"));
-//console.log(centralMedidas.mediaMedidas("Santander"));
-//console.log(centralMedidas.mediaMedidasTotal());
-//console.log(centralMedidas.eliminaCiudad("Santander"))
-//console.log(centralMedidas.mediaMedidas("Santander"));
-//centralMedidas.toConsole();
-//console.log(centralMedidas.insertaAleatorio("Santander"));
-//centralMedidas.toConsole();

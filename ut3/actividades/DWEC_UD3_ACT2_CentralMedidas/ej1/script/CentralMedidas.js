@@ -32,7 +32,7 @@ export default class CentralMedidas{
             let suma = 0;
 
             for (const medida of this.#medidas[ciudad]) {
-                suma += medida;
+                suma += parseInt(medida);
             }
 
             suma = (suma / this.#medidas[ciudad].length).toFixed(2);
@@ -90,25 +90,40 @@ export default class CentralMedidas{
     }
 
     tabla(){
-        let tabla = "<table>";
         let ciudades = this.#medidas.keys();
+        let tabla = "<table border='2'>";
 
-        for (let dia = 0; dia < this.#medidas[ciudades[0]] + 2; dia++) {
-            for (let ciudad = 0; ciudad < 32; ciudad++) {
-                tabla += "<tr>"
-                if (ciudad === 0 && dia === 0){
-                    tabla += "<td></td>"
-                } else if (ciudad === 0 && dia === ciudades.lengt){
-                    tabla += "<td>" + dia + "</td>"
-                } else if (ciudades === 0){
-                    tabla += "<td>Media</td>"
-                }
-
-                tabla += "</tr>"
-            }
+        if (Object.keys(this.#medidas).length === 0){
+            return "";
         }
 
-        tabla += "</table>"
+        tabla += "<tr>";
+        for (let dias = 0; dias < 32; dias++) {
+            if (dias === 0) {
+                tabla += "<td></td>";
+            } else if (dias < 31) {
+                tabla += "<td>" + dias + "</td>";
+            } else {
+                tabla += "<td>Medias</td>";
+            }
+        }
+        tabla += "</tr>";
+
+        for (let ciudad in this.#medidas) {
+            tabla += "<tr>";
+            tabla += "<td>" + ciudad + "</td>";
+
+            for (let dia = 0; dia < this.#medidas[ciudad].length; dia++) {
+                tabla += "<td>" + this.#medidas[ciudad][dia] + "</td>";
+            }
+
+            tabla += "<td>" + this.mediaMedidas(ciudad) + "</td>";
+
+            tabla += "</tr>";
+        }
+
+        tabla += "</table>";
+
 
         return tabla
     }
