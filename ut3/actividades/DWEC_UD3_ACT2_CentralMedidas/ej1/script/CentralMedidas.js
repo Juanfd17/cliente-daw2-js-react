@@ -4,7 +4,6 @@ export default class CentralMedidas{
     }
 
     insertaMedida(ciudad, valores){
-
         if (this.comprobarExiste(ciudad) || valores.length !== 30){
             return false;
         }
@@ -15,8 +14,6 @@ export default class CentralMedidas{
     }
 
     insertaAleatorio(ciudad){
-
-
         let medias = [];
 
         for (let i = 0; i < 30; i++) {
@@ -27,7 +24,6 @@ export default class CentralMedidas{
     }
 
     mediaMedidas(ciudad) {
-
         if (this.comprobarExiste(ciudad)) {
             let suma = 0;
 

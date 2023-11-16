@@ -42,9 +42,18 @@ function guardarMedidas() {
 
     let arrayMedidas = pasarNumerosArray(formMedidas.value);
 
-    if (arrayMedidas)
-    centralMedidas.insertaMedida(formCiudad.value, arrayMedidas);
-    updateTable();
+    let error = document.querySelector("#errores");
+    if (arrayMedidas.length === 30){
+        error.innerText = "Errores";
+        if (!centralMedidas.insertaMedida(formCiudad.value, arrayMedidas)){
+            error.innerText = "Errores: La ciudad ya existe";
+        } else {
+            error.innerText = "Errores";
+        }
+        updateTable();
+    } else {
+        error.innerText = "Errores: Tiene que haber 30 numeros separados por comas";
+    }
 }
 
 function pasarNumerosArray(numeros){
@@ -62,6 +71,11 @@ function borrarCiudad(ev) {
 function updateTable() {
     let tabla = document.querySelector("#tabla");
     tabla.innerHTML = centralMedidas.tabla();
+    updateTemMedia();
 }
 
+function updateTemMedia() {
+    let temMedia = document.querySelector("#temperatura-media");
+    temMedia.innerText = centralMedidas.mediaMedidasTotal();
+}
 let centralMedidas = new CentralMedidas();
