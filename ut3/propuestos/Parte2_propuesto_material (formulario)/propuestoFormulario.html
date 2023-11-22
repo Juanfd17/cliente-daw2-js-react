@@ -14,13 +14,14 @@
 	<form id="formulario" action="#" method="get">
 		<div class="linea_formulario">
 			<label for="nombre">Nombre completo</label>
-			<input type="text" name="nombre" id="nombre" />
+			<input type="text" name="nombre" id="nombre" required/>
 			<div class="limpia"> </div>
 		</div>
+		<div class="error linea_formulario" id="error_nombre"> </div>
 
 		<div class="linea_formulario">
 			<label for="fecha_nacimiento">Fecha de nacimiento</label>
-			<input type="text" name="fecha_nacimiento" id="fecha_nacimiento" />
+			<input type="date" name="fecha_nacimiento" id="fecha_nacimiento" />
 			<div class="limpia"> </div>
 		</div>
 
@@ -33,7 +34,7 @@
 
 		<div class="linea_formulario">
 			<label for="Email">Email</label>
-			<input type="text" name="email" id="email" />
+			<input type="email" name="email" id="email" required/>
 			<div class="limpia"> </div>
 		</div>
 
