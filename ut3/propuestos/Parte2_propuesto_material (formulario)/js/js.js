@@ -20,6 +20,8 @@ function princpal() {
     password2.addEventListener("blur", contraseniasCoinciden)
 
     document.querySelector("#enviar").addEventListener("click", mostrarTodo);
+    let contrasenia = document.querySelector("#password");
+    contrasenia.addEventListener("blur", contraniaValida);
 }
 
 function salidaNombre(ev) {
@@ -27,11 +29,12 @@ function salidaNombre(ev) {
     if (!this.validity.valid) {
         if (this.validity.valueMissing) {
             trataError(CODIGOS_ERROR.NOMBRE_VACIO, this.id);
-        } else {
-            limpiaError(this.id);
         }
+    } else {
+        limpiaError(this.id);
     }
 }
+
 function salidaInput(ev) {
     ev.target.value = ev.target.value.toUpperCase();
 }
@@ -41,13 +44,21 @@ function contraseniasCoinciden(ev) {
     $errorPas = document.querySelector("#error_password2");
 
     if (ev.target.value === $contrasenia.value){
-        $errorPas.innerText = "";
-        $errorPas.style.display = "none";
+        limpiaError(this.id)
     } else {
-        $errorPas.innerText = "Las contraseñas no coinciden";
-        $errorPas.style.display = "block";
+        trataError(CODIGOS_ERROR.PASSWORDS_DISTINTOS, this.id)
     }
 }
+
+function contraniaValida(ev) {
+    this.setCustomValidity("");
+    if (!this.validity.valid) {
+        trataError(CODIGOS_ERROR.PASSWORD_CORTO, this.id);
+    } else {
+        limpiaError(this.id);
+    }
+}
+
 
 function mostrarTodo(){
     // type="text"
@@ -107,7 +118,7 @@ function trataError(error, donde) {
 }
 
 function limpiaError(id) {
-    var campoError=document.querySelector("#error_"+id)
+    let campoError= document.querySelector("#error_"+id)
     campoError.style.display = "none"
     campoError.innerHTML = ""
 }
