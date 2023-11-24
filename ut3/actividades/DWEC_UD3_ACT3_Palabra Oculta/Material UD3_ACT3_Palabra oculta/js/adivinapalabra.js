@@ -30,4 +30,11 @@ export default class Adivinapalabra{
     addFallo(){
         this.#fallos++;
     }
+
+    getMediaAciertos(){
+        if (this.#aciertos === 0 && this.#fallos === 0){
+            return -1;
+        }
+        return this.#aciertos / (this.#aciertos + this.#fallos);
+    }
 }
