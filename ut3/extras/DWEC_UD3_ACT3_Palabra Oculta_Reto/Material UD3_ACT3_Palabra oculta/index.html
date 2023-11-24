@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Palabra Oculta sin Dificultad</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link rel="stylesheet" type="text/css" href="style/formulario.css" />
+        <link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+        <script type="module" src="js/ejercicio1.js"></script>
+    </head>
+
+    <body>
+
+        <h3>Adivina la palabra oculta</h3>
+        
+        <form id="formulario" action="#" method="get">
+            <div class="linea_formulario">
+                <p>Selecciona la cantidad de letras:</p>
+
+                <label>
+                    <input type="radio" name="cantidad-letras" value="0" id="radio6">
+                    6 letras
+                </label>
+
+                <label>
+                    <input type="radio" name="cantidad-letras" value="1" id="radio8">
+                    8 letras
+                </label>
+
+                <label>
+                    <input type="radio" name="cantidad-letras" value="2" id="radio3">
+                    3 letras
+                </label>
+            </div>
+
+
+            <div class="linea_formulario">
+                <label for="letras">Letras</label>
+                <input type="text" name="letras" id="letras" value="" />
+
+                <div class="limpia"> </div>
+            </div>  
+
+            <div class="linea_formulario">
+                <label for="palabra" >Palabra</label>
+                <input type="text" name="palabra" id="palabra" />
+
+                <div class="limpia"> </div>
+            </div> 	
+            
+            <div class="linea_formulario">	
+                <input type="button" name="nueva" id="nueva" value="Nueva palabra" disabled  /> 
+                <input type="button" name="solucion" id="solucion" value="Ver solución"    /> 
+                <input type="button" name="finalizar" id="finalizar" value="Finalizar juego"  /> 
+                <div class="limpia"> </div>
+            </div>		
+
+            <div id="resultado" class="linea_formulario" >
+            </div>
+            
+            <div id="porcentaje" class="linea_formulario error" style="visibility: hidden;">
+                Porcentaje de aciertos: 
+            </div>
+        </form>
+
+
+    </body>
+</html>
+
+
+
