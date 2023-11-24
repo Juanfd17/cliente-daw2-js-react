@@ -1,14 +1,13 @@
 import Color from "./color.js";
 
 const CODIGOS_ERROR={
-    NOMBRE_VACIO:1,
-    PASSWORD_CORTO:2,
-    PASSWORDS_DISTINTOS:3,
-    EMAIL_TIPO:4,
-    DNI_INCORRECTO:5
+    HEX_INVALIDO:1,
+    RGB_INVALIDO:2
 };
 
 window.onload = princpal;
+
+window.onunload = guaradEstado;
 var convertidor = new Color();
 
 var hex
@@ -29,37 +28,51 @@ function princpal(){
     botonRGB.addEventListener("click", rgbToHex);
 
     const muestra = document.querySelector("#muestra");
+
+    if (localStorage.getItem("hex") != null) {
+        convertidor.ValorHex = localStorage.getItem("hex");
+        actualizarColorMuestra();
+    }
+}
+
+function guaradEstado() {
+    if (hex.value != ""){
+        convertidor.ValorHex = localStorage.setItem("hex", hex.value);
+    }
 }
 
 function hexToRgb() {
-
     this.setCustomValidity("");
-    if (/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(this.value)){
+    if (/^[0-9A-Fa-f]{6}$|^([0-9A-Fa-f]{3})$/.test(hex.value)){
         limpiaError(this.id)
         convertidor.ValorHex = hex.value;
         actualizarColorMuestra();
     } else {
-        trataError(CODIGOS_ERROR.HEX, this.id)
+        trataError(CODIGOS_ERROR.HEX_INVALIDO, this.id)
     }
-
-
-
-}
-
-function dniValido(ev){
-
 }
 
 function rgbToHex() {
-    convertidor.ValorRGB= [red.value, green.value, blue.value];
+    let valores = [red.value, green.value, blue.value];
+    let correcto = true;
 
-    actualizarColorMuestra();
+    for (let valor in valores) {
+        if (!(/^(25[0-5]|2[0-4][0-9]|[0-1]?[0-9]{1,2})$/.test(valores[valor]))) {
+            correcto = false;
+        }
+    }
+
+    if (correcto){
+        limpiaError(this.id)
+        convertidor.ValorRGB= [red.value, green.value, blue.value];
+        actualizarColorMuestra();
+    } else {
+        trataError(CODIGOS_ERROR.RGB_INVALIDO, this.id)
+    }
 }
 
 function actualizarColorMuestra() {
     muestra.style.backgroundColor = "#"+convertidor.ValorHex;
-
-    console.log(convertidor.ValorHex);
 
     hex.value = convertidor.ValorHex;
 
@@ -69,33 +82,21 @@ function actualizarColorMuestra() {
 }
 
 function trataError(error, donde) {
-    var campoError=document.querySelector("#error_"+donde)
+    var campoError=document.querySelector("#errores")
     campoError.style.display = "block"
     switch (error) {
         case 1:
-            campoError.innerText = "No seas timid@, dinos tu nombre"
+            campoError.innerText = "El Hex no es valido"
             break
 
         case 2:
-            campoError.innerText = "La contraseña es demasiado corta"
-            break
-
-        case 3:
-            campoError.innerText = "Las contraseñas no coinciden"
-            break
-
-        case 4:
-            campoError.innerText = "El correo no es valido"
-            break
-
-        case 5:
-            campoError.innerText = "El DNI no es valido"
+            campoError.innerText = "El RGB no es valido"
             break
     }
 }
 
 function limpiaError(id) {
-    let campoError= document.querySelector("#error_"+id)
+    let campoError= document.querySelector("#errores")
     campoError.style.display = "none"
     campoError.innerHTML = ""
 }
