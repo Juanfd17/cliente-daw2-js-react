@@ -4,7 +4,8 @@ const CODIGOS_ERROR={
     NOMBRE_VACIO:1,
     PASSWORD_CORTO:2,
     PASSWORDS_DISTINTOS:3,
-    EMAIL_TIPO:4
+    EMAIL_TIPO:4,
+    DNI_INCORRECTO:5
 };
 
 function princpal() {
@@ -22,6 +23,18 @@ function princpal() {
     document.querySelector("#enviar").addEventListener("click", mostrarTodo);
     let contrasenia = document.querySelector("#password");
     contrasenia.addEventListener("blur", contraniaValida);
+
+    let dni = document.querySelector("#dni");
+    dni.addEventListener("blur", dniValido);
+}
+
+function dniValido(ev){
+    this.setCustomValidity("");
+    if (/^\d{8}[A-Za-z]$/.test(this.value)){
+        limpiaError(this.id)
+    } else {
+        trataError(CODIGOS_ERROR.DNI_INCORRECTO, this.id)
+    }
 }
 
 function salidaNombre(ev) {
@@ -114,6 +127,10 @@ function trataError(error, donde) {
         case 4:
             campoError.innerText = "El correo no es valido"
         break
+
+        case 5:
+            campoError.innerText = "El DNI no es valido"
+            break
     }
 }
 

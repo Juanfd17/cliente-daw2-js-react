@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<head>
+    <title>Convertidor Hexadecimal-RGB</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="style/convertidor.css"/>
+    <script type="module" src="js/convertidor.js"></script>
+</head>
+<body>
+
+<h1>Convertidor Hexadecimal-RGB</h1>
+<form id="convertidor">
+    <div class="columna">
+        <p>HEXADECIMAL</p>
+        <input type="button" id="hex-to-rgb" value=">>">
+        <div class="linea" id="primera">
+            <label for="hexadecimal">#</label>
+            <input type="text" id="hexadecimal">
+        </div>
+    </div>
+
+    <div class="columna">
+        <p> RGB</p>
+        <input type="button" id="rgb-to-hex" value="<<">
+
+        <div class="linea">
+            <label for="red" class="span-red">R</label>
+            <input type="text" id="red">
+        </div>
+        <div class="linea">
+            <label for="green" class="span-green">G </label>
+            <input type="text" id="green">
+        </div>
+
+        <div class="linea">
+            <label for="blue" class="span-blue">B</label>
+            <input type="text" id="blue">
+        </div>
+    </div>
+
+    <div class="columna">
+        <p>MUESTRA</p>
+        <div id="muestra"></div>
+    </div>
+</form>
+
+<div id="errores" class="oculto">Errores</div>
+<div id="listado" class="oculto"><p>Historial de colores:</p></div>
+</body>
+</html>
