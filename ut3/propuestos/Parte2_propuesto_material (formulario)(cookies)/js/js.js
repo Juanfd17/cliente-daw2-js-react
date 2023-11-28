@@ -15,22 +15,22 @@ function princpal() {
         input.addEventListener("blur", salidaInput);
     }
 
-    document.querySelector("#nombre").addEventListener("blur", salidaNombre);
+    document.querySelector("#nombre").addEventListener("invalid", salidaNombre);
 
     let password2 = document.querySelector("#password2");
-    password2.addEventListener("blur", contraseniasCoinciden)
+    password2.addEventListener("invalid", contraseniasCoinciden)
 
     document.querySelector("#enviar").addEventListener("click", mostrarTodo);
     let contrasenia = document.querySelector("#password");
-    contrasenia.addEventListener("blur", contraniaValida);
+    contrasenia.addEventListener("invalid", contraniaValida);
 
     let dni = document.querySelector("#dni");
-    dni.addEventListener("blur", dniValido);
+    dni.addEventListener("invalid", dniValido);
 }
 
 function dniValido(ev){
     this.setCustomValidity("");
-    if (/^\d{8}[A-Za-z]$/.test(this.value)){
+    if (!this.checkValidity()){
         limpiaError(this.id)
     } else {
         trataError(CODIGOS_ERROR.DNI_INCORRECTO, this.id)

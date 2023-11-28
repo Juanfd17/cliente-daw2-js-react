@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="UTF-8">
+    <title>Cookies - Ejemplo completo</title>
+</head>
+
+<body>
+    <button type="button" id="verTodas">Ver todas las cookies</button>
+    <button type="button" id="crearCookie">Crear cookie </button>
+    <button type="button" id="modificarCookie">Modificar cookie </button>
+    <button type="button" id="leerCookie">Leer cookie </button>
+    <button type="button" id="borrarCookie">Borrar cookie </button>
+
+    <script>   
+        document.getElementById("verTodas").addEventListener("click",verCookies);
+        document.getElementById("crearCookie").addEventListener("click",crearModifCookie);
+        document.getElementById("modificarCookie").addEventListener("click",crearModifCookie);
+        document.getElementById("leerCookie").addEventListener("click",leerCookie);
+        document.getElementById("borrarCookie").addEventListener("click",borrarCookie);
+        
+        function verCookies(){
+            console.log(document.cookie)
+         }
+        
+        function crearModifCookie(){
+            let nombre = prompt("Nombre");
+            let valor = prompt("Valor");
+
+            let expiracion = prompt("Tiempo expiracion");
+
+            setCookie(nombre, valor, expiracion);
+        }
+        
+        function leerCookie(){
+            let nombre = prompt("nombre");
+            let valor = getCookie(nombre);
+            alert(valor.split("=")[1]);
+        }
+        
+        function borrarCookie(){
+            let nombre = prompt("Nombre");
+            deleteCookie(nombre)
+        }
+        
+        function deleteCookie(nombre){
+            let cookie = getCookie(nombre);
+            setCookie(cookie.split("=")[0].trim(), cookie.split("=")[1].trim(), "Thu, 01 Jan 1970 00:00:01 GMT");
+        }
+        
+        function setCookie(nombre, valor, expiracion){
+            document.cookie = nombre + "=" + valor + ";expires=" + expiracion;
+        }
+        
+        function getCookie(nombre){
+            let cookies = document.cookie;
+
+            cookies = cookies.split(";")
+
+            for (let cookie = 0; cookie < cookies.length; cookie++) {
+                if (cookies[cookie].split("=")[0].trim() === nombre){
+                    return cookies[cookie];
+                }
+            }
+
+            return "No se existe"
+        }
+    </script>
+    
+</body>
+
+</html>
