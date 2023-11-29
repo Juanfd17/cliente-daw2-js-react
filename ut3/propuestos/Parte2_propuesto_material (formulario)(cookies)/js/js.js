@@ -5,7 +5,8 @@ const CODIGOS_ERROR={
     PASSWORD_CORTO:2,
     PASSWORDS_DISTINTOS:3,
     EMAIL_TIPO:4,
-    DNI_INCORRECTO:5
+    DNI_INCORRECTO:5,
+    FECHA_INCORRECTA:6
 };
 
 function princpal() {
@@ -15,101 +16,79 @@ function princpal() {
         input.addEventListener("blur", salidaInput);
     }
 
-    document.querySelector("#nombre").addEventListener("invalid", salidaNombre);
-
-    let password2 = document.querySelector("#password2");
-    password2.addEventListener("invalid", contraseniasCoinciden)
+    document.querySelector("#nombre").addEventListener("change", borrarMensage);
+    document.querySelector("#fecha_nacimiento").addEventListener("change", borrarMensage)
+    document.querySelector("#dni").addEventListener("change", borrarMensage);
+    document.querySelector("#email").addEventListener("change", borrarMensage);
+    document.querySelector("#password").addEventListener("change", borrarMensage);
+    document.querySelector("#password2").addEventListener("change", borrarMensage)
 
     document.querySelector("#enviar").addEventListener("click", mostrarTodo);
-    let contrasenia = document.querySelector("#password");
-    contrasenia.addEventListener("invalid", contraniaValida);
 
-    let dni = document.querySelector("#dni");
-    dni.addEventListener("invalid", dniValido);
-}
-
-function dniValido(ev){
-    this.setCustomValidity("");
-    if (!this.checkValidity()){
-        limpiaError(this.id)
-    } else {
-        trataError(CODIGOS_ERROR.DNI_INCORRECTO, this.id)
-    }
-}
-
-function salidaNombre(ev) {
-    this.setCustomValidity("");
-    if (!this.validity.valid) {
-        if (this.validity.valueMissing) {
-            trataError(CODIGOS_ERROR.NOMBRE_VACIO, this.id);
-        }
-    } else {
-        limpiaError(this.id);
-    }
 }
 
 function salidaInput(ev) {
     ev.target.value = ev.target.value.toUpperCase();
 }
 
-function contraseniasCoinciden(ev) {
-    $contrasenia = document.querySelector("#password");
-    $errorPas = document.querySelector("#error_password2");
+function borrarMensage(ev){
+    limpiaError(this.id)
+}
 
-    if (ev.target.value === $contrasenia.value){
+function contraseniasCoinciden() {
+    let contrasenia = document.querySelector("#password");
+    let contrasenia2 = document.querySelector("#password2");
+
+    if (contrasenia2.value === contrasenia.value){
         limpiaError(this.id)
     } else {
-        trataError(CODIGOS_ERROR.PASSWORDS_DISTINTOS, this.id)
+        trataError(contrasenia2.id)
     }
 }
 
 function contraniaValida(ev) {
-    this.setCustomValidity("");
-    if (!this.validity.valid) {
-        trataError(CODIGOS_ERROR.PASSWORD_CORTO, this.id);
-    } else {
-        limpiaError(this.id);
-    }
+    limpiaError(this.id);
 }
 
 
 function mostrarTodo(){
-    // type="text"
-    document.querySelectorAll("input[type='text']").forEach((option)=>{
-        console.log(option.id + ": " + option.value);
-    });
-    // type="email"
-    document.querySelectorAll("input[type='email']").forEach((option)=>{
-        console.log(option.id + ": " + option.value);
-    });
-    // type="date"
-    document.querySelectorAll("input[type='date']").forEach((option)=>{
-        console.log(option.id + ": " + option.value);
-    });
-    // type="password"
-    document.querySelectorAll("input[type='password']").forEach((option)=>{
-        console.log(option.id + ": " + option.value);
-    });
-    // type="radio"
-    document.querySelectorAll("input[name='genero']").forEach((option)=>{
-        if(option.checked){
-            console.log(option.id + ": " + option.value);
-        }
-    });
-    // type="checkbox"
-    document.querySelectorAll("input[type='checkbox']").forEach((option)=>{
-        console.log(option.id + ": " + option.checked);
-    });
-    // select
-    let selecion = document.querySelector("#favorito");
-    console.log(selecion.id + ": " + selecion.options[selecion.selectedIndex].value);
-    // textarea
-    let comentario = document.querySelector("#comentario");
-    console.log(comentario.id + ": " + comentario.value);
+    let nErrores = getCookie("errores");
+    if (nErrores >= 3){
+        let erroresTotales = document.querySelector("#erroresTotales");
+        erroresTotales.style.display = "block"
+        erroresTotales.innerText = "Has fallado " + nErrores + " veces y has superado el numero maxio de intentos"
+    } else {
+        document.querySelectorAll("input").forEach((option) => {
+            if (option.checkValidity()) {
+                console.log(option.id + " correcto")
+            } else {
+                console.log(option.id + " mal")
+                trataError(option.id)
+            }
+        })
+
+        contraseniasCoinciden();
+    }
 }
 
-function trataError(error, donde) {
-    var campoError=document.querySelector("#error_"+donde)
+function trataError(id) {
+    let error = "";
+
+    if (id === "nombre"){
+        error = CODIGOS_ERROR.NOMBRE_VACIO
+    } else if(id === "fecha_nacimiento"){
+        error = CODIGOS_ERROR.FECHA_INCORRECTA
+    } else if(id === "dni"){
+        error = CODIGOS_ERROR.DNI_INCORRECTO
+    } else if(id === "email") {
+        error = CODIGOS_ERROR.EMAIL_TIPO
+    } else if(id === "password"){
+        error = CODIGOS_ERROR.PASSWORD_CORTO
+    } else if(id === "password2"){
+        error = CODIGOS_ERROR.PASSWORDS_DISTINTOS
+    }
+
+    var campoError=document.querySelector("#error_"+id)
     campoError.style.display = "block"
     switch (error) {
         case 1:
@@ -130,8 +109,26 @@ function trataError(error, donde) {
 
         case 5:
             campoError.innerText = "El DNI no es valido"
-            break
+        break
+
+        case 6:
+            campoError.innerText = "Introduce una fecha valida"
+        break
     }
+
+    let nErrores = getCookie("errores");
+
+    if (nErrores === 0){
+        nErrores = 1
+    } else {
+        nErrores ++;
+    }
+
+    let erroresTotales = document.querySelector("#erroresTotales");
+    erroresTotales.style.display = "block"
+    erroresTotales.innerText = "Has fallado " + nErrores + " veces"
+
+    setCookie("errores", nErrores, 1000)
 }
 
 function limpiaError(id) {
@@ -151,7 +148,7 @@ function getCookie(nombre){
 
     for (let cookie = 0; cookie < cookies.length; cookie++) {
         if (cookies[cookie].split("=")[0].trim() === nombre){
-            return cookies[cookie];
+            return cookies[cookie].split("=")[1];
         }
     }
 
