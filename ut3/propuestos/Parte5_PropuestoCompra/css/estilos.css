@@ -1,0 +1,50 @@
+body{
+    font-size: 2.1em;
+    background: lightyellow;
+    text-align:center;
+    display: grid;
+    grid-template-columns:1fr;
+    justify-content: center;
+   }
+   .coolTitle {
+     text-align: center;
+     font-family: 'Oswald', Helvetica, sans-serif;
+     font-size: 40px;
+     transform: skewY(-10deg);
+     letter-spacing: 4px;
+     word-spacing: -8px;
+     color: tomato;
+     text-shadow: 
+       -1px -1px 0 firebrick,
+       -2px -2px 0 firebrick,
+       -3px -3px 0 firebrick,
+       -4px -4px 0 firebrick,
+       -5px -5px 0 firebrick,
+       -6px -6px 0 firebrick,
+       -7px -7px 0 firebrick,
+       -8px -8px 0 firebrick,
+       -30px 20px 40px dimgrey;
+   }
+   
+   .done {
+     text-decoration: line-through;
+   }
+   #userinput, #enter{
+    padding:12px;
+    font-size:30px;
+    border-radius:5px;
+    background:lightblue;
+   }
+   #enter{
+    background:lightgreen;
+   }
+   .list{
+    display:table;
+    font-size:24px;
+   }
+   .listitem{
+    padding:5px;
+    margin-bottom:10px;
+    background:pink;
+    list-style-type: none;
+   }
