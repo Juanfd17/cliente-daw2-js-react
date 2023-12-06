@@ -1,5 +1,3 @@
-import Resultado from "./Resultado.js";
-
 window.onload = princpal;
 
 const CODIGOS_ERROR={
@@ -28,6 +26,8 @@ function princpal() {
 
     let dni = document.querySelector("#dni");
     dni.addEventListener("blur", dniValido);
+
+    cargarDesdeLocalStorage()
 }
 
 function dniValido(ev){
@@ -74,46 +74,41 @@ function contraniaValida(ev) {
     }
 }
 
+function mostrarTodo() {
+    guardarEnLocalStorage("nombre");
+    guardarEnLocalStorage("fecha_nacimiento");
+    guardarEnLocalStorage("dni");
+    guardarEnLocalStorage("email");
+    guardarEnLocalStorage("password");
 
-function mostrarTodo(){
-    let resultados = [];
+    guardarEnLocalStorage("genero_hombre");
+    guardarEnLocalStorage("genero_mujer");
 
-    //quiero meter todos los datos en un array clave valor
-    // type="text"
-    document.querySelectorAll("input[type='text']").forEach((option)=>{
-        resultados[option.id] = option.value;
-    });
-    // type="email"
-    document.querySelectorAll("input[type='email']").forEach((option)=>{
-        resultados[option.id] = option.value;
-    });
-    // type="date"
-    document.querySelectorAll("input[type='date']").forEach((option)=>{
-        resultados[option.id] = option.value;
-    });
-    // type="password"
-    document.querySelectorAll("input[type='password']").forEach((option)=>{
-        resultados[option.id] = option.value;
-    });
-    // type="radio"
-    document.querySelectorAll("input[name='genero']").forEach((option)=>{
-        if(option.checked){
-            resultados[option.id] = option.value;
-        }
-    });
-    // type="checkbox"
-    document.querySelectorAll("input[type='checkbox']").forEach((option)=>{
-        resultados[option.id] = option.value;
-    });
-    // select
-    let selecion = document.querySelector("#favorito");
-    resultados[selecion.id] = selecion.options[selecion.selectedIndex].value;
-    // textarea
-    let comentario = document.querySelector("#comentario");
-    resultados[option.id] = option.value;
+    guardarEnLocalStorage("boletin");
+    guardarEnLocalStorage("ofertas");
 
-    let resultadoClase = new Resultado(resultados["nombre"],resultados["fecha"], resultados["dni"], resultados["email"], resultados["password"], resultados["genero"], resultados["boletin"], resultados["ofetas"], resultados["favorito"], resultados["comentario"]);
-    console.log(resultadoClase);
+    guardarEnLocalStorage("favorito");
+
+    guardarEnLocalStorage("comentario");
+}
+
+function guardarEnLocalStorage(id) {
+    let input = document.querySelector("#" + id);
+
+    let valor;
+
+    if (input.type === 'checkbox') {
+        valor = input.checked;
+    } else {
+        valor = input.value;
+    }
+
+    if (id.includes("genero")) {
+        localStorage.setItem("genero", valor);
+    } else {
+        localStorage.setItem(id, valor);
+    }
+
 }
 
 function trataError(error, donde) {
@@ -146,4 +141,49 @@ function limpiaError(id) {
     let campoError= document.querySelector("#error_"+id)
     campoError.style.display = "none"
     campoError.innerHTML = ""
+}
+
+function cargarDesdeLocalStorage() {
+    cargarCampoDesdeLocalStorage("nombre");
+    cargarCampoDesdeLocalStorage("fecha_nacimiento");
+    cargarCampoDesdeLocalStorage("dni");
+    cargarCampoDesdeLocalStorage("email");
+    cargarCampoDesdeLocalStorage("password");
+
+    cargarCampoRadioDesdeLocalStorage("genero");
+
+    cargarCampoDesdeLocalStorage("boletin");
+    cargarCampoDesdeLocalStorage("ofertas");
+
+    cargarCampoSelectDesdeLocalStorage("favorito");
+
+    cargarCampoDesdeLocalStorage("comentario");
+}
+
+function cargarCampoDesdeLocalStorage(id) {
+    let valor = localStorage.getItem(id);
+    let input = document.querySelector("#" + id);
+    if (input && valor !== null) {
+        if (input.type === 'checkbox') {
+            input.checked = (valor === 'true');
+        } else {
+            input.value = valor;
+        }
+    }
+}
+
+function cargarCampoRadioDesdeLocalStorage(nombre) {
+    let valor = localStorage.getItem(nombre);
+    let radios = document.querySelectorAll("input[name=" + nombre +"]");
+    radios.forEach((radio) => {
+        radio.checked = (radio.value === valor);
+    });
+}
+
+function cargarCampoSelectDesdeLocalStorage(id) {
+    let valor = localStorage.getItem(id);
+    let select = document.querySelector("#" + id);
+    if (select) {
+        select.value = valor;
+    }
 }

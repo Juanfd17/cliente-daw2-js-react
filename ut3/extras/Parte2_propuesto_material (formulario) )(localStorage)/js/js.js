@@ -28,6 +28,9 @@ function princpal() {
 
     let dni = document.querySelector("#dni");
     dni.addEventListener("blur", dniValido);
+
+    cargarDesdeLocalStorage()
+
 }
 
 function dniValido(ev){
@@ -74,9 +77,8 @@ function contraniaValida(ev) {
     }
 }
 
-
 function mostrarTodo() {
-    let resultados = [];
+    let resultados = {};
 
     document.querySelectorAll("input[type='text']").forEach((option) => {
         resultados[option.id] = option.value;
@@ -111,7 +113,9 @@ function mostrarTodo() {
     resultados[comentario.id] = comentario.value;
 
     let resultadoClase = new Resultado(resultados["nombre"], resultados["fecha_nacimiento"], resultados["dni"], resultados["email"], resultados["password"], resultados["genero"], resultados["boletin"], resultados["ofertas"], resultados["favorito"], resultados["comentario"]);
-    console.log(resultadoClase);
+
+    localStorage.setItem("resultado", JSON.stringify(resultadoClase));
+    console.log(JSON.stringify(resultadoClase))
 }
 
 function trataError(error, donde) {
@@ -144,4 +148,52 @@ function limpiaError(id) {
     let campoError= document.querySelector("#error_"+id)
     campoError.style.display = "none"
     campoError.innerHTML = ""
+}
+
+function cargarDesdeLocalStorage() {
+    let resultadoJSON = localStorage.getItem("resultado");
+
+    if (resultadoJSON) {
+        let resultado = JSON.parse(resultadoJSON);
+
+        cargarCampoDesdeLocalStorage("nombre", resultado.nombre);
+        cargarCampoDesdeLocalStorage("fecha_nacimiento", resultado.fechaNacimiento);
+        cargarCampoDesdeLocalStorage("dni", resultado.dni);
+        cargarCampoDesdeLocalStorage("email", resultado.email);
+        cargarCampoDesdeLocalStorage("password", resultado.contrasenia);
+
+        cargarCampoRadioDesdeLocalStorage("genero", resultado.genero);
+
+        cargarCampoDesdeLocalStorage("boletin", resultado.boletin);
+        cargarCampoDesdeLocalStorage("ofertas", resultado.ofertas);
+
+        cargarCampoSelectDesdeLocalStorage("favorito", resultado.favorito);
+
+        cargarCampoDesdeLocalStorage("comentario", resultado.comentario);
+    }
+}
+
+function cargarCampoDesdeLocalStorage(id, valor) {
+    let input = document.querySelector("#" + id);
+    if (input && valor !== undefined) {
+        if (input.type === 'checkbox') {
+            input.checked = valor;
+        } else {
+            input.value = valor;
+        }
+    }
+}
+
+function cargarCampoRadioDesdeLocalStorage(nombre, valor) {
+    let radios = document.querySelectorAll("input[name=" + nombre +"]");
+    radios.forEach((radio) => {
+        radio.checked = (radio.value === valor);
+    });
+}
+
+function cargarCampoSelectDesdeLocalStorage(id, valor) {
+    let select = document.querySelector("#" + id);
+    if (select && valor !== undefined) {
+        select.value = valor;
+    }
 }
