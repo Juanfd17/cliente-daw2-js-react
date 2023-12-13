@@ -1,0 +1,66 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+  }
+  #imc-form input[type=text], #imc-form input[type=number], #imc-form select {
+    border: 1px solid #cfcfcf;
+    padding: 5px;
+  }
+  
+  #imc-form input[type=button] {
+    padding: 10px;
+    border: 0;
+    color: #fff;
+    background: #00a8c3;
+    cursor: pointer;
+  }
+
+  #imc-form {
+    border: 1px solid #eee;
+    background: #f2f2f2;
+    padding: 20px;
+    max-width: 400px;
+  }
+
+  #imc-form .imc-label {
+    color: #00a8c3;
+    font-weight: 700;
+    margin: 10px 0;
+  }
+
+  #imc-form .imc-row {
+    margin-bottom: 20px;
+  }
+  
+  #imc-results{
+    margin-top: 20px;
+    display: block;
+  }
+  
+  /* FOOTER */
+  #code-boxx {
+    font-weight: 600;
+    margin-top: 50px;
+  }
+  #code-boxx a {
+    display: inline-block;
+    padding: 5px;
+    text-decoration: none;
+    background: #b90a0a;
+    color: #fff;
+  }
+
+  #listado{
+	padding:5px;
+	background-color:#00a8c3;
+	margin:5px;
+	width:100%;
+	border:2px solid #2e0079;
+}
+.caja{
+	border:2px solid #2e0079;
+	width:100%;
+	background-color:white;
+    padding: 5px;
+    margin: 2px;
+}

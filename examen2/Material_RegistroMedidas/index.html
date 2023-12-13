@@ -1,0 +1,64 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Calculadora de IMC</title>
+    <script defer src="js/formulario.js" type="module"></script>
+    <link rel="stylesheet" type="text/css" href="css/estilos.css" />
+  </head>
+  <body>
+    <form id="imc-form">
+      <div class="imc-label">Fecha:</div>
+      <div class="imc-row">
+        <input id="imc-fecha" type="date" required/>
+      </div>
+
+      <div class="imc-label">
+        Nombre archivo imagen (<span id="imc-imagen-format">IMG-XXXX.jpg</span>):
+      </div>
+      <div class="imc-row">
+        <input id="imc-imagen" type="text" required pattern="(IMG-)[0-9]{4}(.jpg)"/>
+      </div>
+
+      <div class="imc-label">Sistema métrico:</div>
+      <div class="imc-row">
+        <label>
+          <input type="radio" id="imc-metrico" name="imc-measure" value="metrico" checked />
+          Métrico
+        </label>
+        <label>
+          <input type="radio" id="imc-imperial" name="imc-measure" value="imperial" /> Imperial
+        </label>
+      </div>
+
+      <div class="imc-row">
+      <label for="imc-peso" class="imc-label">Peso (<span id="imc-peso-unit">KG</span>):</label>
+      <input id="imc-peso" type="number" min="1" max="635" required/>
+       <label for="imc-altura" class="imc-label">
+            Altura (<span id="imc-altura-unit">CM</span>):
+       </label>
+          <input id="imc-altura" type="number" min="54" max="272" required/>
+      </div>
+
+      <input type="button" id="btn-guardar" value="Guardar" />
+      <input type="button" id="btn-deshacer" value="Deshacer" />
+      <div class="imc-row">
+        <span id="imc-results"></span>
+      </div>
+
+      <div class="imc-label">Opciones:</div>
+      <div class="imc-row">
+        <select name="opcion" id="imc-opcion">
+          <option selected value="none">Elige uno...</option>
+          <option value="APA">Altura-peso (Año)</option>
+          <option value="IMC">IMC - Tipo (Fecha)</option>
+          <option value="FIAPI">Fecha: Imagen, Altura, Peso, IMC</option>
+        </select>
+        <input type="button" id="btn-mostrar" value="Mostrar" />
+      </div>
+
+      <div id="listado" style="display: none;">
+    </div>
+
+    </form>
+  </body>
+</html>

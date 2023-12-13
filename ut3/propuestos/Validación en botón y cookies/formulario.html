@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+
+<head>
+	<title>Ejemplo de formulario</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style/formulario.css" />
+	<link href='http://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
+	<script src="js/contacto.js"></script>
+	<script src="js/funciones_cookies.js"></script>
+	<script src="js/formulario.js"></script>
+</head>
+
+<body>
+	<h3>Formulario</h3>
+
+	<form id="formulario" method="get">
+		<div class="linea_formulario">
+			<label for="nombre">Nombre completo</label>
+			<input type="text" name="nombre" id="nombre" required/>
+			<div class="limpia"> </div>
+		</div>
+		<div class="error linea_formulario" id="error_nombre"> </div>
+
+		<div class="linea_formulario">
+			<label for="fecha_nacimiento">Fecha de nacimiento</label>
+			<input type="date" name="fecha_nacimiento" id="fecha_nacimiento" />
+			<div class="limpia"> </div>
+		</div>
+
+		<div class="linea_formulario">
+			<label for="dni">DNI</label>
+			<input type="text" name="dni" id="dni" patter="\\d{8}[A-Z]"/>
+			<div class="limpia"> </div>
+		</div>
+		<div class="error linea_formulario" id="error_dni"> </div>
+
+		<div class="linea_formulario">
+			<label for="Email">Email</label>
+			<input type="email" name="email" id="email" required/>
+			<div class="limpia"> </div>
+		</div>
+		<div class="error linea_formulario" id="error_email"> </div>
+
+		<div class="linea_formulario">
+			<label for="password">Contraseña</label>
+			<input type="password" name="password" id="password" minlength="8" required />
+			<div class="limpia"> </div>
+		</div>
+		<div class="error linea_formulario" id="error_password"> </div>
+
+		<div class="linea_formulario">
+			<label for="password2">Contraseña (repetición)</label>
+			<input type="password" name="password2" id="password2" minlength="8" required/>
+			<div class="limpia"> </div>
+		</div>
+		<div class="error linea_formulario" id="error_password2"> </div>
+
+		<div class="linea_formulario">
+			<label for="genero">Género</label>
+			<div class="botones">
+				<input type="radio" name="genero" id="genero_hombre" value="Hombre"
+					checked="checked" /><span>Hombre</span>
+				<input type="radio" name="genero" id="genero_mujer" value="Mujer" /><span>Mujer</span>
+			</div>
+
+		</div>
+
+		<div class="linea_formulario">
+			<input type="checkbox" name="boletin" id="boletin" value="boletin" />Suscribirme al boletín de novedades
+			<div class="limpia"> </div>
+		</div>
+
+		<div class="linea_formulario">
+			<input type="checkbox" name="ofertas" id="ofertas" value="ofertas" />Informarme sobre ofertas
+			<div class="limpia"> </div>
+		</div>
+
+		<div class="linea_formulario">
+			<label for="favorito">Producto favorito</label>
+			<select name="favorito" id="favorito" required>
+				<option value="">Elige uno...</option>
+				<option value="consolas">Consolas</option>
+				<option value="pc">PC</option>
+				<option value="desarrollo">Desarrollo</option>
+			</select>
+			<div class="limpia"> </div>
+		</div>
+		<div class="error linea_formulario" id="error_favorito"> </div>
+
+		<div class="linea_formulario">
+			<label for="comentario">Comentario</label>
+			<textarea name="comentario" id="comentario"> Introduce tu comentario...</textarea>
+			<div class="limpia"> </div>
+		</div>
+
+
+		<div class="linea_formulario">
+			<input type="button" name="enviar" id="enviar" value="Enviar datos" />
+			<div class="limpia"> </div>
+		</div>
+
+		<div class="linea_formulario intentos">
+			Este es tu primer intento
+		</div>
+		
+	</form>
+</body>
+
+</html>

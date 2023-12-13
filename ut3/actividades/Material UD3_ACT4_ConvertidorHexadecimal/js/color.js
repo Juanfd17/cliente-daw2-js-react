@@ -1,6 +1,6 @@
-export default class Color {
-    #valorHex;
-    #valorRGB;
+    export default class Color {
+        #valorHex;
+        #valorRGB;
 
     constructor(valor = '#ffffff') {
         if (typeof (valor) == 'string') {
