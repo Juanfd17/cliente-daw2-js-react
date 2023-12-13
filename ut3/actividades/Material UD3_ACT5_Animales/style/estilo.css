@@ -1,0 +1,150 @@
+
+html{
+	height:100%;
+}
+
+body{
+	background-color:#FFE0B2;
+	margin:0px;
+	height: 100%;
+}
+
+#animales{
+	width:500px;
+	margin:0 auto;
+	background-color:#FF9900;
+	border-left:2px solid black;
+	border-right:2px solid black;
+}
+
+#animales:after {
+    content: "";
+    clear: both;
+    display: block;
+}
+
+.animal{
+	width:200px;
+	height:200px;
+	margin:25px;
+	float:left;
+	background-size: contain;
+}
+
+.rota{
+	 transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);	
+	
+	 transition: transform 4s;
+	-webkit-transition: -webkit-transform 4s;
+	-moz-transition: -moz-transform 4s; 	
+}
+
+@keyframes gran
+{
+	0%{}
+	50%{	transform: scale(2,2);}	
+	100%{	transform: scale(1,1);}
+}
+
+@-webkit-keyframes gran{
+	0%{}
+	50%{	-webkit-transform: scale(2,2);}
+	100%{	-webkit-transform: scale(1,1);}	
+}
+
+@-o-keyframes gran{
+	0%{}
+	50%{	-o-transform: scale(2,2);}
+	100%{	-o-transform: scale(1,1);}	
+}
+
+
+.grande{
+	animation: gran 4s ease-out;
+	-webkit-animation: gran 4s ease-out;
+	-moz-animation: gran 4s ease-out;
+	-o-animation: gran 4s ease-out;
+}
+
+
+@keyframes peque
+{
+	0%{}
+	50%{	transform: scale(0.5,0.5);}	
+	100%{	transform: scale(1,1);}
+}
+
+@-webkit-keyframes peque{
+	0%{}
+	50%{	-webkit-transform: scale(0.5,0.5);}
+	100%{	-webkit-transform: scale(1,1);}	
+}
+
+@-o-keyframes peque{
+	0%{}
+	50%{	-o-transform: scale(0.5,0.5);}
+	100%{	-o-transform: scale(1,1);}	
+}
+
+
+.pequenio{
+	animation: peque 4s ease-out;
+	-webkit-animation: peque 4s ease-out;
+	-moz-animation: peque 4s ease-out;
+	-o-animation: peque 4s ease-out;
+}
+
+@keyframes baja{
+	0%{}
+	50%{	transform: translate(0px, 100px);}
+	100%{	transform: translate(0px, 0px);}
+}
+
+@-webkit-keyframes baja{
+	0%{}
+	50%{	-webkit-transform: translate(0px,100px);}
+	100%{	-webkit-transform: translate(0px, 0px);}	
+}
+
+@-o-keyframes baja{
+	0%{}
+	50%{	-o-transform: translate(0px, 100px);}
+	100%{	-o-transform: translate(0px, 0px);}	
+}
+
+.baja{
+	animation: baja 4s ease-out;
+	-webkit-animation: baja 4s ease-out;
+	-moz-animation: baja 4s ease-out;
+	-o-animation: baja 4s ease-out;	
+}
+
+@keyframes def{
+	0%{}
+	50%{	transform: skew(15deg, 15deg);}	
+	100%{	transform: skew(0deg, 0deg);}
+}
+
+@-webkit-keyframes def{
+	0%{}
+	50%{	-webkit-transform: skew(15deg, 15deg);}
+	100%{	-webkit-transform: skew(0deg, 0deg);}	
+}
+
+@-o-keyframes def{
+	0%{}
+	50%{	-o-transform: skew(15deg, 15deg);}
+	100%{	-o-transform: skew(0deg, 0deg);}	
+}
+
+.def{
+	animation: def 4s ease-out;
+	-webkit-animation: def 4s ease-out;
+	-moz-animation: def 4s ease-out;
+	-o-animation: def 4s ease-out;
+}
+
+
+
