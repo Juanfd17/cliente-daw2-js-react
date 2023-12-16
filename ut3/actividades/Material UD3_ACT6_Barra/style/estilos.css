@@ -1,0 +1,156 @@
+/* Estilos generales */
+
+@font-face{
+	font-family:Roboto;
+	src:url("fonts/Roboto.ttf");
+}
+
+
+*{
+	font-family: 'Roboto', sans-serif;
+	box-sizing:border-box;
+}
+
+/* Estilos relativos al formulario */
+
+#formulario{
+	width:600px;
+	border:2px solid black;
+	margin:20px;
+	padding-top:20px;
+
+}
+
+#formulario .linea_formulario{
+	margin-bottom:20px;
+}
+
+#formulario .linea_formulario label{
+	float:left;
+	width:15%;
+	padding:4px;
+	text-align:right;
+}
+
+#formulario .linea_formulario input[type="text"]
+{
+	float:left;
+	width:15%;
+	padding:4px;
+	margin-right:10px;
+}
+
+
+#formulario .linea_formulario input[type="number"]
+{
+	float:left;
+	width:15%;
+	padding:4px;
+	margin-right:10px;
+}
+
+#formulario .linea_formulario input[type="button"]
+{
+	float:left;
+	padding:4px;
+	margin-right:10px;
+	margin-left:10px;
+}
+
+
+
+#formulario .botones{
+	margin:0 auto;
+}
+
+#formulario input:focus{
+	border:2px solid black;
+	outline:0px;
+	background-color:#B9DAF4;
+}
+
+.limpia{
+	clear:both;
+}
+
+
+
+/* Estilos de la gráfica */
+
+#grafica{
+	border:2px solid black;
+	width:600px;
+	margin:20px;
+	padding:20px;
+}
+
+
+/* Estilo a aplicar a las cajas contenedoras */
+
+#grafica .contenedor{
+	width:504px;
+	margin:10px;
+
+	background-color:#FFE066;
+	border:2px solid black;
+	height:30px;
+}
+
+/* Estilo general a aplicar a las barras de progreso */
+
+#grafica .contenedor .progreso{
+	background-color: #D4D4D4;
+	font-size: .8em;
+
+	text-align:center;
+	height:26px;
+	padding:5px;
+}
+
+
+/* Visibilidad de elementos */
+
+.oculto{
+	display:none;
+}
+
+.visible{
+	display:block;
+}
+
+
+/* Formato de la capa de mensajes */
+
+.errores{
+   	width:600px;
+	border:2px solid black;
+	margin:20px;
+	
+	color:#DD4040;
+	padding:5px;
+	padding-left:20px;	
+	
+	background-color:rgba(150,0,0,0.2);
+	border-radius:2px;       
+    
+	clear:both;
+     
+}
+
+.informacion{
+   width:600px;
+	border:2px solid black;
+	margin:20px;
+   
+	padding-left:20px;
+	color:#40DD40;
+	padding:5px;
+	padding-left:25px;
+	background-color:rgba(0,150,0,0.2);
+	border-radius:2px;
+	
+	clear:both; 
+}
+
+
+

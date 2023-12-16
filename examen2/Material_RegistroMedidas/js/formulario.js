@@ -10,6 +10,11 @@ let peso = document.querySelector("#imc-peso");
 let altura = document.querySelector("#imc-altura");
 let resultado = document.querySelector("#imc-results")
 
+fecha.addEventListener("invalid", validarFecha());
+img.addEventListener("invalid", validarImagen());
+peso.addEventListener("invalid", validarPeso());
+altura.addEventListener("invalid", validarAltura());
+
 let botonGuaradar = document.querySelector("#btn-guardar")
 let botonDesacer = document.querySelector("#btn-deshacer")
 
@@ -216,4 +221,7 @@ function listarResultados() {
             lista.appendChild(caja);
         }
     }
+}
+function validarFecha() {
+    
 }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="utf-8" />
+	<link rel="stylesheet" type="text/css" href="style/estilos.css" />
+
+	<title>Ejercicio gráfica barras</title>
+	<script type="module" src="js/formulario.js"></script>
+</head>
+
+<body>
+	<form id="formulario">
+		<div class="linea_formulario">
+			<label for="etiqueta">Etiqueta:</label>
+			<input type="text" name="etiqueta" id="etiqueta" required autocomplete="off" />
+			<label for="valor">Valor:</label>
+			<input type="number" name="valor" id="valor" min="1" required autocomplete="off" />
+			<input type="button" name="nuevo-dato" id="nuevo-dato" value="Añadir" />
+			<input type="button" name="quita-dato" id="quita-dato" value="Borrar" />
+			<div class="limpia"> </div>
+		</div>
+	</form>
+
+	<div id="grafica" class="oculto">
+	</div>
+
+	<div id="mensajes" class="oculto">
+	</div>
+
+</body>
+
+</html>
