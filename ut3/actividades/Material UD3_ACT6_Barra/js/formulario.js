@@ -12,6 +12,9 @@ let lista;
 let mensaje;
 
 let grafica;
+
+let fomulario;
+
 function principal() {
     etiqueta = document.querySelector("#etiqueta");
     valor = document.querySelector("#valor");
@@ -20,37 +23,60 @@ function principal() {
 
     lista = document.querySelector("#grafica");
     mensaje = document.querySelector("#mensajes");
+    fomulario = document.querySelector("#formulario");
 
     grafica = new Grafica();
 
     botonAnadir.addEventListener("click", anadir);
     botonBorrar.addEventListener("click", borrar);
+
+    etiqueta.addEventListener("invalid", errorEtiqueta);
+    valor.addEventListener("invalid", errorValor);
+}
+function errorEtiqueta() {
+    if (etiqueta.valueMissing) {
+        etiqueta.setCustomValidity("Inserte un valor");
+    } else {
+        etiqueta.setCustomValidity("");
+    }
 }
 
-function anadir() {
-    if (!document.querySelector("#formulario").checkValidity()) {
-        ponerMensaje('Por favor, ingresa una etiqueta y un valor válido mayor a 0.');
+function errorValor() {
+    if (valor.valueMissing) {
+        valor.setCustomValidity("Inserte un valor");
+    } else if (valor.value <= 0) {
+        valor.setCustomValidity("El valor debe ser mayor que 0");
     } else {
-        grafica.agregar(etiqueta.value, valor.value);
+        valor.setCustomValidity("");
+    }
+}
 
-        ponerMensaje('Se ha intestado con exito el dato ( ' + etiqueta.value + ': ' + valor.value + ' )');
-        actualizarLista()
+
+function anadir() {
+    if (fomulario.checkValidity()) {
+        grafica.agregar(etiqueta.value, valor.value);
+        ponerMensaje('Se ha intentado con éxito el dato ( ' + etiqueta.value + ': ' + valor.value + ' )', false);
+        actualizarLista();
+    } else {
+        fomulario.reportValidity();
     }
 }
 
 function borrar() {
-    if (!etiqueta.checkValidity()) {
-        ponerMensaje('Por favor, ingresa una etiqueta para borrar.');
-    } else {
-        grafica.eliminar(etiqueta.value)
-        actualizarLista()
+    if (etiqueta.checkValidity()) {
+        grafica.eliminar(etiqueta.value);
+        actualizarLista();
     }
 }
 
-function ponerMensaje(mensajeTexto) {
+
+function ponerMensaje(mensajeTexto, error) {
     mensaje.className = "visible informacion";
     mensaje.innerHTML = mensajeTexto;
 
+    if (error){
+        mensaje.className = "visible errores"
+    }
 }
 
 function actualizarLista() {
