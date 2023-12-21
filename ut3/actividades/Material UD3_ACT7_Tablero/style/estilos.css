@@ -1,0 +1,109 @@
+@font-face{
+	font-family: Roboto;
+	src:url("fonts/Roboto-Regular.ttf");
+}
+
+
+*{
+	box-sizing: border-box;
+}
+
+html{
+	height:100%;
+}
+
+body{
+	font-family: Roboto;
+	background-image:url("img/brush.jpg");
+	margin:0px;
+	height: 100%;
+}
+
+h1{
+	margin-top:0px;	
+}
+
+/* Contenedor del tablero */
+
+#contenedor{
+	width:600px;
+	text-align:center;
+	margin:0 auto;
+	background-color:#D6D6D6;
+	border-left:5px solid black;
+	border-right:5px solid black;
+	padding-top:10px;
+	padding-bottom:10px;
+}
+
+/* Contiene la paleta de color */
+
+#paleta{
+	margin:0 auto;
+}
+
+/* Clase común a cada caja de color */
+
+.color{
+	width: 80px;
+	height: 50px;
+	display:inline-block;
+	margin-left:10px;
+	border:medium solid transparent;
+}
+
+/* Ids correspondientes a cada uno de los colores */
+
+#color1 {
+	background-color: #F00;
+}
+
+#color2 {
+	background-color: #0F0;
+}
+
+#color3 {
+	background-color: #00F;
+}
+
+#color4 {
+	background-color: #FF0;
+}
+
+#color5 {
+	background-color: #0FF;
+}
+
+#color6 {
+	background-color: #FFF;
+}
+
+
+/* Paleta de color seleccionada */
+.seleccionado{
+	border: 5px solid #000000;
+}
+
+
+/* Tablero de dibujo */
+.zonaDibujo{
+	display:inline-block;
+	
+}
+
+/* Cada fila del tablero de dibujo */
+.filadibujo{
+	margin:0px;
+	padding:0px;
+	height:12px;
+}
+
+/* Cada celda del tablero de dibujo */
+.celdadibujo {
+	width: 10px;
+	height:10px;
+	margin: 1px;
+	padding: 0px;
+	background-color:white;
+	display:inline-block;
+}
