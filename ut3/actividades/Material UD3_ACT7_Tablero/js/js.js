@@ -45,6 +45,8 @@ function ponerColores(color) {
             estado.style.color = this.colores[i]
             colorActual = this.colores[i]
             pintarActivo = true
+
+            document.body.style.cursor = 'crosshair'
         }
     }
 }
@@ -71,7 +73,6 @@ zonaDibujo.className = "zonaDibujo"
 
 let fila = 40
 let columna = 40
-
 
 for (let filaN = 0; filaN < fila; filaN++) {
     let fila = document.createElement("div")
@@ -114,4 +115,6 @@ function cambiarEstado() {
         pintarActivo = true
         estado.innerText = "ACTIVO"
     }
+
+    document.body.style.cursor = pintarActivo ? 'crosshair' : 'default'
 }
