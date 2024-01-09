@@ -1,0 +1,226 @@
+
+/************************** Estilos generales ************************** */
+
+@font-face{
+    font-family:Roboto;
+    src:url("fonts/Roboto-Regular.ttf");
+}
+
+*{
+    font-family:"Roboto";
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/************************** Edificio ************************** */
+.edificio {
+    border:5px solid black;
+    margin:0 auto;
+    width:90%;
+    background-color:#FFCC00;
+    padding: 20px;
+    margin-top:10px;
+}
+
+/************************** Datos del edificio ************************** */
+.edificio h1, h2, h3{
+    border: 3px solid black;
+    background-color:#CCCCFF;
+    padding:10px;
+    display:inline;
+}
+
+/************************** Pisos de un edificio ************************** */
+
+.edificio .pisos{
+    border: 3px solid black;
+    background-color:#CCCCFF;
+    padding:10px;
+    clear:both;
+    margin-top:20px;
+
+    content:"";
+    clear:both;
+    display:block;
+}
+
+.edificio .pisos:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+
+
+/************************** Planta de un edificio ************************** */
+
+.edificio .pisos .planta:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+
+/************************** Propietario (= puerta) ************************* */
+
+.edificio .pisos .propietario{
+    height:150px;
+    border:3px solid black;
+    background-color:white;
+    text-align:center;
+    margin-top:10px;
+}
+
+/************************** Imagen de un propietario ******************** */
+
+
+.edificio .pisos .propietario img{
+    width:75px;
+}
+
+/************************** Panel de botones de un propietario ************************* */
+
+
+.edificio .pisos .propietario botones{
+    display:block;
+    margin:0 auto;
+    clear:left;
+    margin-top:5px;
+
+}
+
+/************************** Botón de un propietario ************************* */
+
+
+.edificio .pisos .propietario button{
+    border:2px solid black;
+}
+
+
+
+/************************** Definición de columnas  ************************* */
+/************************** Se aplican a los propietarios ******************* */
+
+[class*="col-"] {
+    float: left;
+    padding: 15px;
+}
+
+.col-1 {width: 100%;}
+.col-2 {width: 50%;}
+.col-4 {width: 25%;}
+
+/****************   Formulario *****************************************/
+
+/* Ventana modal*/
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgba(0,0,0,0.4);
+}
+
+
+.contenido-modal{
+    position: relative;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 5px solid black;
+    width: 80%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+/* Animación para ventana modal */
+@-webkit-keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 0; opacity: 1}
+}
+
+#formulario{
+    margin:0 auto;
+    margin-bottom:10px;
+    padding-top:20px;
+    font-size:.8em;
+}
+
+#formulario .linea_formulario{
+    margin-bottom:20px;
+}
+
+#formulario .linea_formulario:after{
+    content:"";
+    clear:both;
+    display:block;
+}
+
+#formulario .linea_especial{
+    background-color:#CCCCFF;
+    padding:20px;
+}
+
+#formulario .linea_formulario label{
+    float:left;
+    width:150px;
+    padding:4px;
+    text-align:right;
+}
+
+#formulario .linea_formulario input[type="text"],
+#formulario .linea_formulario input[type="number"],
+#formulario .linea_formulario select,
+#formulario .linea_formulario .botones-genero
+{
+    float:left;
+    width:15%;
+    padding:4px;
+    margin-right:10px;
+}
+
+#formulario .linea_formulario button{
+    padding:4px;
+    border:2px solid black;
+}
+
+
+
+#formulario input:focus{
+    border:2px solid black;
+    outline:0px;
+    background-color:#B9DAF4;
+}
+
+.limpia{
+    clear:both;
+}
+
+
+/************************** Estilos generales relativos a botones ************************* */
+button.borrar{
+    background-color:#FFCCCC;
+}
+
+button.modificar{
+    background-color:#CCCCFF;
+}
+
+button.aniadir, .button.cerrar{
+    background-color:#CCFFCC;
+}
+
