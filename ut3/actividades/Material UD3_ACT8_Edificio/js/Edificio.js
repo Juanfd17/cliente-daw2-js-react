@@ -86,38 +86,18 @@ export default class Edificio {
         let divPisos = document.createElement("div")
         divPisos.className = "pisos"
 
-        for (let i = 0; i < this.#plantas.reverse().length; i++) {
+        for (let planta = 0; planta < this.#plantas.reverse().length; planta++) {
             let piso = document.createElement("div")
             piso.className = "planta"
-            let numeroPuertas = this.getNumeroPuertas(i)
+            let numeroPuertas = this.getNumeroPuertas(planta)
 
-            this.#plantas[i].map(propietario =>{
-                let propietarioDiv = document.createElement("div")
-                propietarioDiv.className = `propietario col-${numeroPuertas}`
+            for (let puerta = 0; puerta < this.#plantas[planta].length; puerta++) {
+                let propietario = this.#plantas[planta][puerta]
 
-                let nombrePropietario = document.createElement("p")
-                let img = document.createElement("img")
+                let propietarioDiv = this.generarPropietario(propietario, numeroPuertas, this.#plantas.length - planta -1, puerta)
 
-                if (propietario !== null){
-                    nombrePropietario.innerText = propietario.nombre
-                    switch (propietario.miembros) {
-                        case 1:
-                            if (propietario.genero === "masculino"){
-                                img.src = "img/hombre.jpg"
-                            } else {
-                                img.src = "img/mujer.jpg"
-                            }
-                    }
-                } else {
-                    nombrePropietario.innerText = "Vacio"
-                }
-
-
-                propietarioDiv.append(nombrePropietario)
-                propietarioDiv.append(img)
-
-                piso.append(propietarioDiv)
-            })
+                    piso.append(propietarioDiv)
+            }
 
             divPisos.append(piso)
         }
@@ -137,5 +117,146 @@ export default class Edificio {
 
     getpropietario(planta, puerta){
         return this.#plantas[planta][puerta]
+    }
+
+    generarPropietario(propietario, numeroPuertas, piso, puerta){
+        let propietarioDiv = document.createElement("div")
+        propietarioDiv.className = `propietario col-${numeroPuertas}`
+        propietarioDiv.id = "_" + piso + "" + puerta
+
+        let nombrePropietario = document.createElement("p")
+        let img = document.createElement("img")
+
+        let botones = document.createElement("div")
+        botones.className = "botones"
+
+        if (propietario !== null){
+            nombrePropietario.innerText = propietario.nombre
+            img.src = "img/familia-2.jpg"
+
+            switch (propietario.miembros) {
+                case 1:
+                    if (propietario.genero === "hombre"){
+                        img.src = "img/hombre.jpg"
+                    } else {
+                        img.src = "img/mujer.jpg"
+                    }
+                    break
+                case 2:
+                    img.src = "img/pareja.jpg"
+                    break
+                case 3:
+                    img.src = "img/familia-1.jpg"
+                    break
+            }
+
+            let botonModificar = document.createElement("button")
+            botonModificar.className = "modificar"
+            botonModificar.innerText = "Modificar"
+
+            botonModificar.addEventListener("click", ev => {
+                let form = document.querySelector("#formulario")
+                form.style.display = "block"
+
+                let formPlanta = document.querySelector("#planta")
+                let formPuerta = document.querySelector("#puerta")
+
+                formPlanta.value = piso
+                formPuerta.value = puerta
+
+                let formNombre = document.querySelector("#nombre")
+                let formApellidos = document.querySelector("#apellidos")
+
+                let nombreApellidos = propietario.nombre.split(" ")
+                formNombre.value = nombreApellidos[0]
+                formApellidos.value = nombreApellidos[1]
+
+                let formFamilia = document.querySelector("#unidad-familiar")
+
+                formFamilia.selectedIndex = 5
+                switch (propietario.miembros) {
+                    case 1:
+                        formFamilia.selectedIndex = 1
+                        break
+
+                    case 2:
+                        formFamilia.selectedIndex = 2
+                        break
+
+                    case 3:
+                        formFamilia.selectedIndex = 3
+                        break
+
+                    case 4:
+                        formFamilia.selectedIndex = 4
+                        break
+                }
+
+                let genero_hombre = document.querySelector("#genero-hombre")
+                let genero_mujer = document.querySelector("#genero-mujer")
+
+                if (propietario.genero === "hombre"){
+                    genero_hombre.checked = true
+                    genero_mujer.checked = false
+                } else {
+                    genero_hombre.checked = false
+                    genero_mujer.checked = true
+                }
+
+            })
+
+            let botonBorrar = document.createElement("button")
+            botonBorrar.className = "borrar"
+            botonBorrar.innerText = "Borrar"
+
+            botonBorrar.addEventListener("click", ev =>{
+                let planta = []
+
+                for (let propietarioT of this.#plantas[propietario.piso -1]) {
+                    if (propietario !== propietarioT){
+                        planta.push(propietarioT)
+                    } else {
+                        planta.push(null)
+
+                        let id = "_" + (propietarioT.piso -1) + "" + (propietarioT.puerta -1)
+                        let propietarioDiv = document.querySelector("#" + id)
+                        propietarioDiv.parentNode.replaceChild(this.generarPropietario(null, this.getNumeroPuertas(propietarioT.piso -1), propietarioT.piso -1, propietarioT.puerta -1), propietarioDiv)
+                    }
+                }
+
+                this.#plantas[propietario.piso -1] = planta
+
+                console.log(this.imprimePlantas())
+            })
+
+            botones.append(botonModificar)
+            botones.append(botonBorrar)
+        } else {
+            nombrePropietario.innerText = "Vacio"
+            img.src = "img/vacio.jpg"
+
+            let botonAniadir = document.createElement("button")
+            botonAniadir.className = "aniadir"
+            botonAniadir.innerText = "Añadir"
+
+            botonAniadir.addEventListener("click", ev =>{
+                let form = document.querySelector("#formulario")
+                form.style.display = "block"
+
+                let formPlanta = document.querySelector("#planta")
+                let formPuerta = document.querySelector("#puerta")
+
+                formPlanta.value = piso
+                formPuerta.value = puerta
+            })
+
+            botones.append(botonAniadir)
+        }
+
+        propietarioDiv.append(nombrePropietario)
+        propietarioDiv.append(img)
+        propietarioDiv.append(botones)
+
+        return propietarioDiv
     }
 }
