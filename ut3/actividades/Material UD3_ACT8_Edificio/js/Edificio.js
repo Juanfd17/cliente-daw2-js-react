@@ -90,6 +90,7 @@ export default class Edificio {
             let piso = document.createElement("div")
             piso.className = "planta"
             let numeroPuertas = this.getNumeroPuertas(planta)
+            piso.id = "_" + (this.#plantas.length - planta - 1)
 
             for (let puerta = 0; puerta < this.#plantas[planta].length; puerta++) {
                 let propietario = this.#plantas[planta][puerta]
@@ -158,11 +159,17 @@ export default class Edificio {
                 let form = document.querySelector("#formulario")
                 form.style.display = "block"
 
+                let formularioModificar = document.querySelector("#formulario-modificar")
+                formularioModificar.disabled = false
+
+                let formularioAniadir = document.querySelector("#formulario-aniadir")
+                formularioAniadir.disabled = true
+
                 let formPlanta = document.querySelector("#planta")
                 let formPuerta = document.querySelector("#puerta")
 
-                formPlanta.value = piso
-                formPuerta.value = puerta
+                formPlanta.value = piso + 1
+                formPuerta.value = puerta + 1
 
                 let formNombre = document.querySelector("#nombre")
                 let formApellidos = document.querySelector("#apellidos")
@@ -243,11 +250,34 @@ export default class Edificio {
                 let form = document.querySelector("#formulario")
                 form.style.display = "block"
 
+                let formularioModificar = document.querySelector("#formulario-modificar")
+                formularioModificar.disabled = true
+
+                let formularioAniadir = document.querySelector("#formulario-aniadir")
+                formularioAniadir.disabled = false
+
+
                 let formPlanta = document.querySelector("#planta")
                 let formPuerta = document.querySelector("#puerta")
 
-                formPlanta.value = piso
-                formPuerta.value = puerta
+                formPlanta.value = piso + 1
+                formPuerta.value = puerta + 1
+
+                let formNombre = document.querySelector("#nombre")
+                let formApellidos = document.querySelector("#apellidos")
+
+                formNombre.value = ""
+                formApellidos.value = ""
+
+                let formFamilia = document.querySelector("#unidad-familiar")
+
+                formFamilia.selectedIndex = 0
+
+                let genero_hombre = document.querySelector("#genero-hombre")
+                let genero_mujer = document.querySelector("#genero-mujer")
+
+                genero_hombre.checked = true
+                genero_mujer.checked = false
             })
 
             botones.append(botonAniadir)
@@ -258,5 +288,11 @@ export default class Edificio {
         propietarioDiv.append(botones)
 
         return propietarioDiv
+    }
+
+    modificarPropietario(propietario, planta, puerta){
+        let piso =document.querySelector(`#_${planta}`)
+
+        piso.replaceChild(this.generarPropietario(propietario, this.getNumeroPuertas(planta), planta, puerta), document.querySelector(`#_${planta}${puerta}`))
     }
 }

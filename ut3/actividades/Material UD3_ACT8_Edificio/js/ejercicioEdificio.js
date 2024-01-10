@@ -81,5 +81,48 @@ function creaEdificio() {
 }
 
 function cargaManejadores() {
+  let formularioBorrar = document.querySelector("#formulario-borrar")
+  let formularioModificar = document.querySelector("#formulario-modificar")
+  let formularioAniadir = document.querySelector("#formulario-aniadir")
 
+  formularioBorrar.addEventListener("click", ev =>{
+    let form = document.querySelector("#formulario")
+    form.style.display = "none"
+  })
+
+  formularioModificar.addEventListener("click", evt => {
+    let piso = document.querySelector("#planta").value -1
+    let puerta = document.querySelector("#puerta").value -1
+    let nombre = document.querySelector("#nombre").value + " " + document.querySelector("#apellidos").value
+    let genero = document.querySelector("#genero-hombre").checked ? "hombre" : "mujer"
+    let miembros = document.querySelector("#unidad-familiar").selectedIndex
+
+    let propietario = {
+      piso: piso +1,
+      puerta: puerta +1,
+      nombre: nombre,
+      genero: genero,
+      miembros: miembros,
+    }
+
+    miEdificio.modificarPropietario(propietario, piso, puerta)
+  })
+
+  formularioAniadir.addEventListener("click", evt => {
+    let piso = document.querySelector("#planta").value -1
+    let puerta = document.querySelector("#puerta").value -1
+    let nombre = document.querySelector("#nombre").value + " " + document.querySelector("#apellidos").value
+    let genero = document.querySelector("#genero-hombre").checked ? "hombre" : "mujer"
+    let miembros = document.querySelector("#unidad-familiar").selectedIndex
+
+    let propietario = {
+      piso: piso +1,
+      puerta: puerta +1,
+      nombre: nombre,
+      genero: genero,
+      miembros: miembros,
+    }
+
+    miEdificio.modificarPropietario(propietario, piso, puerta)
+  })
 }
