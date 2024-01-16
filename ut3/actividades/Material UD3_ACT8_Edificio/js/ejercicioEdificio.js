@@ -91,6 +91,7 @@ function cargaManejadores() {
   })
 
   formularioModificar.addEventListener("click", evt => {
+    let form = document.querySelector("#formulario")
     let piso = document.querySelector("#planta").value -1
     let puerta = document.querySelector("#puerta").value -1
     let nombre = document.querySelector("#nombre").value + " " + document.querySelector("#apellidos").value
@@ -105,7 +106,11 @@ function cargaManejadores() {
       miembros: miembros,
     }
 
-    miEdificio.modificarPropietario(propietario, piso, puerta)
+    if (validarFormulario()){
+      miEdificio.modificarPropietario(propietario, piso, puerta)
+      form.style.display = "none"
+      console.log(miEdificio.imprimePlantas())
+    }
   })
 
   formularioAniadir.addEventListener("click", evt => {
@@ -114,6 +119,7 @@ function cargaManejadores() {
     let nombre = document.querySelector("#nombre").value + " " + document.querySelector("#apellidos").value
     let genero = document.querySelector("#genero-hombre").checked ? "hombre" : "mujer"
     let miembros = document.querySelector("#unidad-familiar").selectedIndex
+    let form = document.querySelector("#formulario")
 
     let propietario = {
       piso: piso +1,
@@ -123,6 +129,38 @@ function cargaManejadores() {
       miembros: miembros,
     }
 
-    miEdificio.modificarPropietario(propietario, piso, puerta)
+    if (validarFormulario()){
+      miEdificio.modificarPropietario(propietario, piso, puerta)
+      form.style.display = "none"
+      console.log(miEdificio.imprimePlantas())
+    }
   })
+
+  function validarFormulario() {
+    let nombre = document.querySelector("#nombre")
+    let apellidos =document.querySelector("#apellidos")
+    let unidadFamiliar = document.querySelector("#unidad-familiar")
+
+    document.getElementById("nombre").setCustomValidity("")
+    document.getElementById("apellidos").setCustomValidity("")
+    document.getElementById("unidad-familiar").setCustomValidity("")
+
+    if (nombre.value.trim() === "") {
+      nombre.setCustomValidity("Por favor, ingresa el nombre.")
+    }
+
+    if (apellidos.value.trim() === "") {
+      apellidos.setCustomValidity("Por favor, ingresa los apellidos.")
+    }
+
+    if (unidadFamiliar.value === "none") {
+      unidadFamiliar.setCustomValidity("Por favor, elige una unidad familiar.")
+    }
+
+    if (!document.getElementById("formulario").checkValidity()) {
+      return false
+    }
+
+    return true
+  }
 }

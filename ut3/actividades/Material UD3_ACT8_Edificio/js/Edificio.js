@@ -290,9 +290,25 @@ export default class Edificio {
         return propietarioDiv
     }
 
-    modificarPropietario(propietario, planta, puerta){
+    modificarPropietario(propietarioNuevo, planta, puerta){
         let piso =document.querySelector(`#_${planta}`)
+        let propietarioAnterior = this.getpropietario(planta, puerta)
 
-        piso.replaceChild(this.generarPropietario(propietario, this.getNumeroPuertas(planta), planta, puerta), document.querySelector(`#_${planta}${puerta}`))
+        let plantaNueva = []
+
+        for (let propietarioT of this.#plantas[propietarioNuevo.piso -1]) {
+            if (propietarioAnterior !== propietarioT){
+                plantaNueva.push(propietarioT)
+            } else {
+                plantaNueva.push(propietarioNuevo)
+
+                let id = "_" + (propietarioNuevo.piso -1) + "" + (propietarioNuevo.puerta -1)
+                let propietarioDiv = document.querySelector("#" + id)
+                propietarioDiv.parentNode.replaceChild(this.generarPropietario(null, this.getNumeroPuertas(propietarioNuevo.piso -1), propietarioNuevo.piso -1, propietarioNuevo.puerta -1), propietarioDiv)
+            }
+        }
+
+        this.#plantas[propietarioNuevo.piso -1] = plantaNueva
+        piso.replaceChild(this.generarPropietario(propietarioNuevo, this.getNumeroPuertas(planta), planta, puerta), document.querySelector(`#_${planta}${puerta}`))
     }
 }

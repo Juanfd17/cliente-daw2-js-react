@@ -10,22 +10,22 @@
     </head>
 
     <body>
-        <form id="formulario" class="modal">
+        <form id="formulario" class="modal" onsubmit="return false" >
             <div class="contenido-modal">
                 <h1>Gestión de propietarios</h1>
                 <div class="linea_formulario">
                     <!-- Nombre del propietario -->
                     <label for="nombre" >Nombre:</label>
-                    <input type="text" id="nombre" autocomplete="off"   />
+                    <input type="text" id="nombre" autocomplete="off" required/>
 
                     <!-- Apellidos del propietario -->
                     <!--<label for="nombre" >Apellidos</label>-->
                     <label for="apellidos" >Apellidos</label>
-                    <input type="text" id="apellidos" autocomplete="off"  />
+                    <input type="text" id="apellidos" autocomplete="off" required/>
 
                     <!-- Tipo de unidad familiar -->
                     <label for="unidad-familiar">Unidad familiar</label>
-                    <select id="unidad-familiar" >
+                    <select id="unidad-familiar" required>
                         <option selected value="none">Elige uno...</option>
                         <option  value="soltero">Soltero</option>
                         <option value="pareja">Pareja</option>
