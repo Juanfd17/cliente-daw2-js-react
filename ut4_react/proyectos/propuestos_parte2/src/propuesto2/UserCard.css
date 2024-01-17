@@ -1,0 +1,68 @@
+.App {
+    font-family: sans-serif;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+header {
+    margin-bottom: 30px;
+}
+
+.col-md-4 {
+    margin-bottom: 30px;
+}
+
+.card {
+    padding: 30px;
+    border: solid 1px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    width: 400px;
+}
+.card:hover {
+    box-shadow: 0 0 12px 3px rgba(0, 0, 0, 0.08);
+}
+.card-title {
+    margin-top: 20px;
+}
+.card-text {
+    font-size: 14px;
+    color: rgba(0, 0, 0, 0.6);
+}
+.lista {
+    font-size: 12px;
+    list-style-type:none;
+    padding-left:0px;
+}
+
+.avatar {
+    width: 140px;
+    margin: auto;
+}
+.avatar img {
+    border: solid 6px black;
+    border-radius: 50%;
+    width: 80%
+}
+.card:hover .avatar img {
+    border-color: rgb(99, 204, 131);
+}
+
+.btn {
+    border-radius: 25px;
+}
+
+footer p {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+footer p a,
+footer p a:hover {
+    color: rgb(99, 204, 131);
+}
+
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1040px;
+    }
+}
