@@ -1,8 +1,8 @@
 import './UserCard.css'
 
-function UserCard({name, amount=0, worker, avatar, address}) {
+function UserCard({name, amount=0, worker, avatar, address, greet}) {
     return (
-        <div className="card">
+        <div className="card" onClick={() => greet(name)}>
             <div className="avatar">
                 <img src={avatar}/>
             </div>
