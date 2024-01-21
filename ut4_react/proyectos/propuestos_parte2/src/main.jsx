@@ -5,6 +5,7 @@ import Users from "./propuesto2/Users.jsx";
 import CheeseHater from "./propuesto3/CheeseHater.jsx";
 import ConectarElementos from "./propuesto4/ConectarElementos.jsx";
 import Desabilitar from "./propuesto5/Desabilitar.jsx";
+import Contador from "./propuesto6/Contador.jsx";
 
 let usuarios= [
     {
@@ -45,5 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <CheeseHater></CheeseHater>
       <ConectarElementos></ConectarElementos>
       <Desabilitar></Desabilitar>
+      <Contador></Contador>
+      <Contador></Contador>
   </React.StrictMode>,
 )
