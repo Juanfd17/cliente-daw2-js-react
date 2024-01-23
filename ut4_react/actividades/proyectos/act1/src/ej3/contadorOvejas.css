@@ -1,0 +1,47 @@
+.title {
+  color: red;
+  font-size: 20px;
+  text-align: center;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.counter {
+  font-size: 70px;
+  margin: 0 50px 0 0;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button {
+  border: none;
+  background-color: green;
+  color: white;
+  font-weight: bold;
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  border-radius: 4px;
+}
+
+.sheep__img {
+  width: 100px;
+  padding: 10px;
+}
+
+.image__list {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+}

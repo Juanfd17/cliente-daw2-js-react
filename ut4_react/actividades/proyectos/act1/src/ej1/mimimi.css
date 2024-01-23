@@ -1,0 +1,12 @@
+.wrapper__mimimi {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.translator__parragraph {
+  color: greenyellow;
+  font-size: 30px;
+  background-color: black;
+  text-transform: uppercase;
+}
