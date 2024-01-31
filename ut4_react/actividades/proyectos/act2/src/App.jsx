@@ -1,18 +1,41 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import "./estilos ACT2/App.css"
 import IMCForm from "./IMCForm.jsx";
 import ListarRegistros from "./ListarRegistros.jsx";
 import {Graficos} from "./Graficos.jsx";
+import {getData, storeData} from "./estilos ACT2/localStorage.js";
 
 function App(props) {
-    const [registros, setRegistros] = useState([])
+    const [registros, setRegistros] = useState(getData('data'))
+    const [prevRegistros, setPrevRegistros] = useState(null)
+
+    if (registros === null){
+        setRegistros([])
+    }
+
     const manejaCambiar = valor => {
+        guardarEstado()
         setRegistros([...registros, valor])
     }
 
     const manejaBorrar = valor => {
+        guardarEstado()
         setRegistros(registros.filter(registro => registro.key !== valor));
     }
+
+    const deshacer = () =>{
+        setRegistros(prevRegistros)
+    }
+
+    const guardarEstado = () =>{
+        setPrevRegistros(registros)
+    }
+
+    useEffect(() => {
+        storeData('data', registros)
+    }, [registros]);
+
+
 
     return (
         <div className='container'>
@@ -30,6 +53,10 @@ function App(props) {
 
             <div className='row data-container'>
                 <ListarRegistros registros={registros} borrar={manejaBorrar}/>
+            </div>
+
+            <div className='row'>
+                <button className='calculate-btn' onClick={deshacer}>Deshacer</button>
             </div>
 
             <div className='row'>
