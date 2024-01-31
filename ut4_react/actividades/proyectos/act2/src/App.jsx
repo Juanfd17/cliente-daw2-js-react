@@ -2,10 +2,16 @@ import React, {useState} from 'react';
 import "./estilos ACT2/App.css"
 import IMCForm from "./IMCForm.jsx";
 import ListarRegistros from "./ListarRegistros.jsx";
+import {Graficos} from "./Graficos.jsx";
+
 function App(props) {
     const [registros, setRegistros] = useState([])
     const manejaCambiar = valor => {
         setRegistros([...registros, valor])
+    }
+
+    const manejaBorrar = valor => {
+        setRegistros(registros.filter(registro => registro.key !== valor));
     }
 
     return (
@@ -23,7 +29,11 @@ function App(props) {
             </div>
 
             <div className='row data-container'>
-                <ListarRegistros registros={registros}/>
+                <ListarRegistros registros={registros} borrar={manejaBorrar}/>
+            </div>
+
+            <div className='row'>
+                <Graficos registros={registros} />
             </div>
         </div>
     );

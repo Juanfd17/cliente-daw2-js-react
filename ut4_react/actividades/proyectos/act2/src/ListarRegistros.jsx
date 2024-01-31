@@ -2,13 +2,13 @@ import React from 'react';
 import './estilos ACT2/App.css'
 import Info from "./Info.jsx";
 
-function ListarRegistros({registros}) {
+function ListarRegistros({registros, borrar}) {
     return (
         <div className='data-container row'>
             {registros.length > 0 ? (
                     <>
-                        {registros.map((info, index) => (
-                            <Info key={index} wieght={info.weight} height={info.height}/>
+                        {registros.map((info) => (
+                            <Info id={info.key} key={info.key} wieght={info.weight} height={info.height} borrar={borrar} fecha={info.fecha}/>
                         ))}
                     </>
                 ) : (

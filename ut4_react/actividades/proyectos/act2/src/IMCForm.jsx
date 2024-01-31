@@ -6,8 +6,11 @@ function ImcForm({cambiar}) {
     const [height, setHeight] = useState('')
 
     const handleSubmit = () => {
-        cambiar({weight, height})
+        let key = uuid.v4()
+        let fecha = new Date().toLocaleDateString();
+        cambiar({weight, height, key, fecha})
     }
+
 
     return (
         <div className='row'>
