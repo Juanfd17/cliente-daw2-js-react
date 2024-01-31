@@ -25,7 +25,7 @@ export function Graficos({registros}) {
         labels: labels,
         datasets: [{
             label: 'IMC',
-            data: registros.map((info) => info.weight / (info.height * info.height)),
+            data: registros.map((info) => info.weight / ((info.height / 100) * (info.height / 100))),
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
