@@ -1,14 +1,26 @@
 import React, {useEffect, useState} from 'react';
-import paciente from "./Paciente.jsx";
+import Error from './Error'
 
 function Formulario({addPaciente, pacienteActual, seleccionarPaciente}) {
+    const [error, setError] = useState(false)
+
     const [nombreMascota, setNombreMascota] = useState('')
     const [nombrePropietario, setNombrePropietario] = useState('')
     const [correo, setCorreo] = useState('')
     const [fechaAlta, setFechaAlta] = useState('')
     const [sintomas, setSintomas] = useState('')
 
+
+    const [texto, setTexto] = useState('Agregar paciente')
+
     const handleSubmit = () => {
+        if( [ nombre, propietario, email, fecha, sintomas ].includes('') ) {
+            setError(true)
+            return;
+        }
+
+        setError(false)
+
         let key = ""
 
         if (pacienteActual !== null) {
@@ -25,6 +37,8 @@ function Formulario({addPaciente, pacienteActual, seleccionarPaciente}) {
         setFechaAlta('')
         setSintomas('')
 
+        setTexto("Agregar paciente")
+
         seleccionarPaciente(null)
     }
 
@@ -34,6 +48,8 @@ function Formulario({addPaciente, pacienteActual, seleccionarPaciente}) {
         setCorreo(paciente.correo)
         setFechaAlta(paciente.fechaAlta)
         setSintomas(paciente.sintomas)
+
+        setTexto("Actualizar paciente")
     }
 
     useEffect(() => {
@@ -45,6 +61,7 @@ function Formulario({addPaciente, pacienteActual, seleccionarPaciente}) {
     return (
         <div>
             <form className="bg-white shadow-md rounded-lg py-10 px-5 mb-10 card mt-10 pt-4 pb-4">
+                {error &&  <Error><p>Todos los campos son obligatorios</p></Error>}
                 <div className="mb-2">
                     <label htmlFor="mascota" className="text-gray-700 font-weight-bold text-uppercase">Nombre Mascota</label>
                     <input id="mascota" type="text" placeholder="Nombre de la Mascota" className="border border-2 w-100 p-2 mt-2 form-control form-control-rounded placeholder-gray-400" onChange={(e)=>setNombreMascota(e.target.value)} value={nombreMascota}/>
@@ -70,7 +87,7 @@ function Formulario({addPaciente, pacienteActual, seleccionarPaciente}) {
                     <textarea id="sintomas" className=" border-2 w-100 p-2 mt-2 form-control form-control-rounded placeholder-gray-400" placeholder="Describe los Síntomas" onChange={(e)=>setSintomas(e.target.value)} value={sintomas}/>
                 </div>
 
-                <button className="bg-primary text-white w-100 p-3 text-uppercase font-weight-bold hover:bg-primary-dark cursor-pointer transition-colors" onClick={handleSubmit}>Agregar Paciente</button>
+                <button className="bg-primary text-white w-100 p-3 text-uppercase font-weight-bold hover:bg-primary-dark cursor-pointer transition-colors" onClick={handleSubmit}>{texto}</button>
             </form>
         </div>
     );
