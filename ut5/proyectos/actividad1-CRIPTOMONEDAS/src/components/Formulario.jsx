@@ -33,20 +33,81 @@ const Select = styled.select`
 `
 
 
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled'
-function Formulario(props) {
+function Formulario({actualizar}) {
+    const [criptos, setCriptos] = useState([])
+    const [monedas, setMonedas] = useState([])
+    const [seletMoneda, setSeletMoneda] = useState([])
+    const [seletCripto, setSeletCripto] = useState([])
+    const[loading, setLoading]= useState(false)
+
+
+    useEffect(() => {
+        setLoading(true)
+
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+
+        fetch("https://min-api.cryptocompare.com/data/all/coinlist", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                let newCripto = [...criptos];
+                Object.values(result.Data).map((cripto) => {
+                    newCripto.push({CoinName: cripto.CoinName, Name: cripto.Name});
+                })
+                setCriptos(newCripto);
+            })
+            .catch((error) => console.error(error));
+        setLoading(false)
+
+    }, [])
+
+    useEffect(() => {
+        setLoading(true)
+
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+
+        fetch("https://openexchangerates.org/api/currencies.json", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                let newMonedas = [...monedas];
+                Object.keys(result).map((moneda) => {
+                    newMonedas.push({Nombre: result[moneda], Codigo: moneda});
+                })
+                setMonedas(newMonedas);
+            })
+            .catch((error) => console.error(error));
+        setLoading(false)
+
+    }, [])
+
     return (
         <div>
             <Label>Elige tu Moneda</Label>
-            <Select>
-                <option value="nada">Seleccione</option>
-                <option value="USD">Dolares $</option>
-                <option value="EUR">Euros €</option>
+            <Select onChange={(e) => setSeletMoneda(e.target.value)}>
+                <option value="">Selecciona</option>
+                {loading ? (<div>Loading</div>) : (
+                    monedas.map((moneda) =>
+                        <option value={moneda.Codigo}>{moneda.Nombre} ({moneda.Codigo})</option>
+                    )
+                )}
             </Select>
             <Label>Elige tu Criptomoneda</Label>
-            <Select></Select>
-            <Button>COTIZAR</Button>
+            <Select onChange={(e) => setSeletCripto(e.target.value)}>
+                <option value="">Selecciona</option>
+                {loading ? (<div>Loading</div>) : (
+                    criptos.map((cripto) =>
+                        <option value={cripto.Name}>{cripto.CoinName}</option>
+                    )
+                )}
+            </Select>
+            <Button onClick={ () => actualizar(seletMoneda, seletCripto)}>COTIZAR</Button>
         </div>
     );
 }
