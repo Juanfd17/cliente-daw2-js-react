@@ -20,7 +20,7 @@ const P = styled.p`
     }
 `
 
-const Precio = styled.p`
+const Precio = styled.span`
     font-size: 24px;
     span {
         font-weight: 700;
@@ -30,21 +30,19 @@ const Precio = styled.p`
 import React from 'react';
 import styled from '@emotion/styled'
 
-function Resultado({precio, simbolo, precioMax, precioMin, variacion, ultimaAct, img, mostrar}) {
+function Resultado({precio, precioMax, precioMin, variacion, ultimaAct, img}) {
     return (
-        <div>
-            {!mostrar ? ("") : (
-                <Contenedor>
-                    <P>El precio es de: <Precio>{simbolo}{precio}</Precio></P>
-                    <p>Precio mas alto del dia: <Precio>{simbolo}{precioMax}</Precio></p>
-                    <p>Precio mas bajo del dia: <Precio>{simbolo}{precioMin}</Precio></p>
-                    <p>Variacion ultimas 24h: <Precio>{variacion}</Precio></p>
-                    <p>Ultima actualizacion: <Precio>{ultimaAct}</Precio></p>
-                    <IMG src={img}></IMG>
-                </Contenedor>
-            )}
-        </div>
-    );
+        <Contenedor>
+            <IMG src={img} />
+            <div>
+                <P>El precio es de: <Precio>{precio}</Precio></P>
+                <P>Precio mas alto del dia: <Precio>{precioMax}</Precio></P>
+                <P>Precio mas bajo del dia: <Precio>{precioMin}</Precio></P>
+                <P>Variacion ultimas 24h: <Precio>{variacion}</Precio></P>
+                <P>Ultima actualizacion: <Precio>{ultimaAct}</Precio></P>
+            </div>
+        </Contenedor>
+    )
 }
 
 export default Resultado;

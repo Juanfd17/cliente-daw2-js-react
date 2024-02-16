@@ -61,9 +61,8 @@ function App(props) {
         fetch(`https://min-api.cryptocompare.com/data/pricemultifull?fsyms=${cripto}&tsyms=${moneda}`, requestOptions)
             .then((response) => response.json())
             .then((result) =>{
-                const data = result.RAW[cripto][moneda];
+                const data = result.DISPLAY[cripto][moneda];
                 setPrecio(data.PRICE);
-                setSimbolo(result.DISPLAY[cripto][moneda].TOSYMBOL)
                 setPrecioMin(data.LOWDAY);
                 setPrecioMax(data.HIGHDAY);
                 setVariacion(data.CHANGEPCT24HOUR);
@@ -78,9 +77,12 @@ function App(props) {
     return (
         <Contenedor>
             <Imagen src={ImagenCripto} alt="imagenes criptomonedas" />
-            <H1>Cotiza Criptomonedas al instante</H1>
-            <Formulario actualizar={actualizar}></Formulario>
-            <Resultado precio={precio} simbolo={simbolo} precioMax={precioMax} precioMin={precioMin} variacion={variacion} ultimaAct={ultimaAct} img={img} mostrar={mostrar}></Resultado>
+            <div>
+                <H1>Cotiza Criptomonedas al instante</H1>
+                <Formulario actualizar={actualizar}></Formulario>
+                {mostrar && <Resultado precio={precio} precioMax={precioMax} precioMin={precioMin} variacion={variacion} ultimaAct={ultimaAct} img={img} />}
+
+            </div>
         </Contenedor>
     );
 }

@@ -35,12 +35,14 @@ const Select = styled.select`
 
 import React, {useEffect, useState} from 'react';
 import styled from '@emotion/styled'
+import Error from "./Error.jsx";
 function Formulario({actualizar}) {
     const [criptos, setCriptos] = useState([])
     const [monedas, setMonedas] = useState([])
-    const [seletMoneda, setSeletMoneda] = useState([])
-    const [seletCripto, setSeletCripto] = useState([])
+    const [seletMoneda, setSeletMoneda] = useState('')
+    const [seletCripto, setSeletCripto] = useState('')
     const[loading, setLoading]= useState(false)
+    const [error, setError] = useState(false)
 
 
     useEffect(() => {
@@ -87,8 +89,19 @@ function Formulario({actualizar}) {
 
     }, [])
 
+    const handleSubmit = (e) => {
+        if(seletMoneda === '' || seletCripto === '') {
+            setError(true)
+            return;
+        }
+        setError(false)
+
+        actualizar(seletMoneda, seletCripto)
+    }
+
     return (
         <div>
+            { error &&  <Error><p>Todos los campos son obligatorios</p></Error>}
             <Label>Elige tu Moneda</Label>
             <Select onChange={(e) => setSeletMoneda(e.target.value)}>
                 <option value="">Selecciona</option>
@@ -107,7 +120,7 @@ function Formulario({actualizar}) {
                     )
                 )}
             </Select>
-            <Button onClick={ () => actualizar(seletMoneda, seletCripto)}>COTIZAR</Button>
+            <Button onClick={ () => handleSubmit()}>COTIZAR</Button>
         </div>
     );
 }
