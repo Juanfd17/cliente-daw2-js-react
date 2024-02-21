@@ -30,7 +30,11 @@ const CrearUsuario = () => {
 
         fetch("https://www.melivecode.com/api/users/create", requestOptions)
             .then((response) => response.text())
-            .then((result) => console.log(result))
+            .then((result) => {
+                console.log(result)
+                {window.location.href=`/`}
+
+            })
             .catch((error) => console.error(error));
     }
 
