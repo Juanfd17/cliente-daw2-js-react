@@ -1,53 +1,66 @@
-import Button from "@mui/material/Button";
+import Button from "@mui/material/Button"
 
 const IMG= styled.img`
     display: block;
     width: 120px;
 `
 
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import Typography from "@mui/material/Typography";
+import * as React from 'react'
+import Table from '@mui/material/Table'
+import TableBody from '@mui/material/TableBody'
+import TableCell from '@mui/material/TableCell'
+import TableContainer from '@mui/material/TableContainer'
+import TableHead from '@mui/material/TableHead'
+import TableRow from '@mui/material/TableRow'
+import Paper from '@mui/material/Paper'
+import Typography from "@mui/material/Typography"
 import styled from '@emotion/styled'
-import Modal from '@mui/material/Modal';
-import {useEffect, useState} from 'react';
-import {Box, Divider, TextField} from "@mui/material";
-import {useParams} from "react-router-dom";
+import Modal from '@mui/material/Modal'
+import {useState} from 'react'
+import {Box, Divider, TextField} from "@mui/material"
+import IconButton from '@mui/material/IconButton';
+import CloseIcon from '@mui/icons-material/Close';
 
 export default function Tabla({rows}) {
     const [open, setOpen] = useState(false);
 
-    const { id } = useParams();
-    const [fname, setFname] = useState('');
-    const [lname, setLname] = useState('');
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [avatar, setAvatar] = useState('');
+    const [id, setId] = useState('')
+    const [fname, setFname] = useState('')
+    const [lname, setLname] = useState('')
+    const [username, setUsername] = useState('')
+    const [email, setEmail] = useState('')
+    const [avatar, setAvatar] = useState('')
 
-    const handleOpen = () => setOpen(true);
-    const handleClose = () => setOpen(false);
+    const handleOpen = () => setOpen(true)
+    const handleClose = () => setOpen(false)
+
+
 
     function editarUsuario(id) {
         fetch(`https://www.melivecode.com/api/users/${id}`)
             .then(response => response.json())
             .then(data => {
                 data = data.user
-                setFname(data.fname);
-                setLname(data.lname);
-                setUsername(data.username);
-                setEmail(data.email);
-                setAvatar(data.avatar);
+                setId(data.id)
+                setFname(data.fname)
+                setLname(data.lname)
+                setUsername(data.username)
+                setEmail(data.email)
+                setAvatar(data.avatar)
             });
 
         handleOpen()
+    }
 
+    function crearUsuario() {
+        setId('')
+        setFname('')
+        setLname('')
+        setUsername('')
+        setEmail('')
+        setAvatar('')
 
+        handleOpen()
     }
 
     function delUsuario(id) {
@@ -71,7 +84,7 @@ export default function Tabla({rows}) {
             .catch((error) => console.error(error));
     }
 
-    function handleSubmit(event) {
+    function fechEditarUsuario(event) {
         event.preventDefault();
 
         const myHeaders = new Headers();
@@ -103,12 +116,44 @@ export default function Tabla({rows}) {
         handleClose()
     }
 
+    function fechCrearUsuario() {
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "fname": fname,
+            "lname": lname,
+            "username": username,
+            "email": email,
+            "avatar": avatar
+        });
+
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch("https://www.melivecode.com/api/users/create", requestOptions)
+            .then((response) => response.text())
+            .then((result) => {
+                console.log(result)
+                {window.location.href=`/`}
+
+            })
+            .catch((error) => console.error(error));
+    }
+
     return (
         <TableContainer sx={{display:'flex', flexDirection:'column', alignItems:'center', marginTop: '10px'}} component={Paper}>
-            <Modal open={open} onClose={handleClose}>
+            <Modal open={open}>
                 <Box sx={{ width: 400, margin:'auto', marginTop:'40px', background:'white', p:'3px' }}>
                     <Typography variant="h5" gutterBottom>
-                        Datos del nuevo usuario
+                        {id === '' ? 'Datos del nuevo usuario' : 'Editar Usuario'}
+                    <IconButton aria-label="close" onClick={handleClose} sx={{color: (theme) => theme.palette.grey[500]}}>
+                        <CloseIcon />
+                    </IconButton>
                     </Typography>
                     <Divider />
                     <Box sx={{ padding: "20px" }}>
@@ -117,8 +162,8 @@ export default function Tabla({rows}) {
                         <TextField id="usuario" label="Nombre de usuario" variant="outlined" fullWidth margin="normal" value={username} onChange={e => setUsername(e.target.value)}/>
                         <TextField id="email" label="Email" variant="outlined" fullWidth margin="normal" value={email} onChange={e => setEmail(e.target.value)}/>
                         <TextField id="img" label="Avatar" variant="outlined" fullWidth margin="normal" value={avatar} onChange={e => setAvatar(e.target.value)}/>
-                        <Button variant="contained" fullWidth size="large" sx={{mt: 3}} onClick={handleSubmit}>
-                            EDITAR USUARIO
+                        <Button variant="contained" fullWidth size="large" sx={{mt: 3}} onClick={id === '' ? fechCrearUsuario: fechEditarUsuario }>
+                            {id === '' ? 'CREAR USUARIO' : 'Editar Usuario'}
                         </Button>
                     </Box>
                 </Box>
@@ -126,6 +171,10 @@ export default function Tabla({rows}) {
 
             <Typography sx={{flex: '1 1 100%', color: 'primary.main', p: '10px'}} variant="h6" id="tableTitle" component="div">
                 USUAIROS
+
+                <Button color="inherit" onClick={crearUsuario}>
+                    Crear usuario
+                </Button>
             </Typography>
             <Table sx={{width:'90%' ,p:'30px', marginBottom:'10px'}} component={Paper} aria-label="a dense table">
                 <TableHead>

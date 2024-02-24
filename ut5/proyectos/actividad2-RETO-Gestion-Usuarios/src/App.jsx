@@ -1,10 +1,8 @@
+import React, { useState } from 'react';
 import Header from "./Header.jsx";
 import Tabla from "./Tabla.jsx";
-import {useEffect, useState} from "react";
-import {Routes, Route} from "react-router-dom";
-import CrearUsuario from "./CrearUsuario.jsx";
-import {BrowserRouter as Router} from "react-router-dom";
-import EditarUsuario from "./EditarUsuario.jsx";
+import {useEffect} from "react";
+export const UserContext = React.createContext();
 
 function App() {
     const [rows, setRows] = useState([])
@@ -27,20 +25,10 @@ function App() {
 
 
     return (
-        <Router>
+        <div>
             <Header />
-            <Routes>
-                <Route path='/' element={
-                    <Tabla  rows={rows}/>
-                }/>
-
-                <Route path='/crearUsuario' element={
-                    <CrearUsuario/>
-                }/>
-
-                <Route path="/editarUsuario/:id" element={<EditarUsuario />} />
-            </Routes>
-        </Router>
+            <Tabla  rows={rows}/>
+        </div>
     )
 }
 
